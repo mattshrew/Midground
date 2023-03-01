@@ -115,6 +115,10 @@ body {
 }
 
 @media screen and (max-width: 960px) {
+    #navbar__logo {
+        margin-right: 4rem;
+    }
+
     .navbar__container {
         display: flex;
         justify-content: center;
