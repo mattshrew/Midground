@@ -1,0 +1,117 @@
+.tic-tac-toe {
+    background-color: #141414;
+    color: #141414;
+}
+
+#play {
+    margin-bottom: 2rem;
+}
+
+.tic-tac-toe__title {
+    text-align: center;
+    font-size: 3.5rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    margin-top: 50px;
+    margin-bottom: 1rem;
+}
+
+.game__info, .game__result {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin: 5px;
+}
+
+.game__result {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 9rem 9rem 9rem;
+    grid-template-rows: 9rem 9rem 9rem;
+    grid-gap: 5px;
+    justify-content: center;
+    background-color: #141414;
+    padding: 10px;
+}
+
+.board__square {
+    background-color: #333333;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: font-size 1s cubic-bezier(0.1, 1, 1, 1);
+}
+
+.board__square:active {
+    font-size: 1rem;
+}
+
+.tic-tac-toe__button {
+    font-size: 1rem;
+    background-image: linear-gradient(to top, #a060ff 0%, #60a0ff 100%);
+    padding: 10px 22px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.4s;
+    outline: none;
+}
+
+.tic-tac-toe__button:hover {
+    background-image: linear-gradient(to top, #c040ff 0%, #8080ff 100%);
+transition: all 0.3s ease;
+}
+
+.tic-tac-toe__button:hover:after {
+    width: 100%;
+}
+
+
+@media screen and (max-width: 960px) {
+    .tic-tac-toe__title {
+        font-size: 2.8rem;
+        margin-top: 6rem;
+    }
+
+    .board {
+        grid-template-columns: 8rem 8rem 8rem;
+        grid-template-rows: 8rem 8rem 8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .tic-tac-toe__title {
+        font-size: 2.5rem;
+    }
+
+    .board__square {
+        font-size: 4rem;
+    }
+
+    .board {
+        grid-template-columns: 7rem 7rem 7rem;
+        grid-template-rows: 7rem 7rem 7rem;
+    }
+}

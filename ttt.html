@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +9,11 @@
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/ttt.css">
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- Navigation -->
@@ -18,23 +22,23 @@
         <div class="navbar__container">
             <a href="/" id="navbar__logo"><i class="fas fa-moon"></i>MIDGROUND</a>
             <div class="navbar__toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
             </div>
             <ul class="navbar__menu">
-                <li class="navbar__item">
-                    <a href="/" class="navbar__links">Home</a>
-                </li>
-                <li class="navbar__item">
-                    <a href="/ttt.html" class="navbar__links navbar__links--current">TTT</a>
-                </li>
-                <li class="navbar__item">
-                    <a href="/c4.html" class="navbar__links">C4</a>
-                </li>
-                <li class="navbar__btn">
-                    <a href="/" class="button">Sign In</a>
-                </li>
+            <li class="navbar__item">
+                <a href="/" class="navbar__links">Home</a>
+            </li>
+            <li class="navbar__item">
+                <a href="/ttt.html" class="navbar__links navbar__links--current">TTT</a>
+            </li>
+            <li class="navbar__item">
+                <a href="/c4.html" class="navbar__links">C4</a>
+            </li>
+            <li class="navbar__btn">
+                <a href="/" class="button">Sign In</a>
+            </li>
 
             </ul>
         </div>
@@ -45,19 +49,41 @@
     <div class="main">
         <div class="main__container">
             <div class="main__content">
-                <h1>THE MIDGROUND</h1>
-                <h2>TIC TAC TOE</h2>
-                <p>IN DEVELOPMENT</p>
-                <button class="main__btn"><a href="/">RETURN HOME</a></button>
+            <h1>GAMES</h1>
+            <h2>> TIC TAC TOE</h2>
+            <p>IN DEVELOPMENT</p>
+            <button class="main__btn"><a href="#play">PLAY NOW</a></button>
             </div>
             <div class="main__img--container">
-                <img src="assets/images/pic1.svg" alt="pic" id="main__img">
+            <img src="assets/images/pic1.svg" alt="pic" id="main__img">
             </div>
         </div>
     </div>
 
+    <!-- Tic Tac Toe -->
+    <div id="play"><br /></div>
+    <div class="tic-tac-toe">
+        <h1 class="tic-tac-toe__title">PLAYER VS PLAYER</h1>
+        <div class="game__info"></div>
 
-    <!-- Footer -->
+        <div class="board">
+            <div class="board__square" id="top-left"></div>
+            <div class="board__square" id="top-middle"></div>
+            <div class="board__square" id="top-right"></div>
+            <div class="board__square" id="middle-left"></div>
+            <div class="board__square" id="middle-middle"></div>
+            <div class="board__square" id="middle-right"></div>
+            <div class="board__square" id="bottom-left"></div>
+            <div class="board__square" id="bottom-middle"></div>
+            <div class="board__square" id="bottom-right"></div>
+        </div>
+
+        <div class="game__result"></div>
+        <button class="tic-tac-toe__button" onclick="resetGame()">RESET</button>
+    </div>
+
+
+  <!-- Footer -->
 
     <div class="footer__container">
         <div class="social__media">
@@ -65,22 +91,29 @@
                 <div class="footer__logo">
                     <a href="/" id="footer__logo"><i class="fas fa-moon"></i>MIDGROUND</a>
                 </div>
-                <p class="website__info">Designed by Matthew Yang &NonBreakingSpace; • &NonBreakingSpace; Template by&NonBreakingSpace;<a class="website__attribution" href="https://www.youtube.com/@briandesign">Brian Design</a></p>
+                <p class="website__info">Designed by Matthew Yang &NonBreakingSpace; • &NonBreakingSpace; Template
+                    by&NonBreakingSpace;<a class="website__attribution" href="https://www.youtube.com/@briandesign">Brian
+                    Design</a></p>
                 <div class="social__icons">
-                    <a class="social__icon--link" href="/" target="_blank" aria-label="Discord">
+                    <a class="social__icon--link" href="https://discord.com/users/672173302373941256" target="_blank" aria-label="Discord">
                         <i class="fab fa-discord discord"></i>
+                        <span class="tooltip">Minuit#0554</span>
                     </a>
-                    <a class="social__icon--link" href="/" target="_blank" aria-label="Instagram">
+                    <a class="social__icon--link" href="https://www.instagram.com/mattshrewy" target="_blank" aria-label="Instagram">
                         <i class="fab fa-instagram insta"></i>
+                        <span class="tooltip">@mattshrewy</span>
                     </a>
-                    <a class="social__icon--link" href="/" target="_blank" aria-label="Youtube">
-                        <i class="fab fa-youtube youtube"></i>
+                    <a class="social__icon--link" href="https://github.com/mattshrew" target="_blank" aria-label="Github">
+                        <i class="fab fa-github github"></i>
+                        <span class="tooltip">mattshrew</span>
                     </a>
-                    <a class="social__icon--link" href="/" target="_blank" aria-label="Twitter">
+                    <a class="social__icon--link" target="_blank" aria-label="Twitter">
                         <i class="fab fa-twitter twitter"></i>
+                        <span class="tooltip">???</span>
                     </a>
-                    <a class="social__icon--link" href="/" target="_blank" aria-label="LinkedIn">
+                    <a class="social__icon--link" target="_blank" aria-label="LinkedIn">
                         <i class="fab fa-linkedin linkedin"></i>
+                        <span class="tooltip">???</span>
                     </a>
                 </div>
             </div>
@@ -88,5 +121,8 @@
     </div>
 
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/ttt.js"></script>
+
 </body>
+
 </html>
