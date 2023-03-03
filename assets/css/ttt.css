@@ -66,10 +66,6 @@
     font-size: 5rem;
 }
 
-.board__square.is-active.x {
-    font-size: 7rem;
-}
-
 .tic-tac-toe__button {
     font-size: 1rem;
     background-image: linear-gradient(to top, #a060ff 0%, #60a0ff 100%);
@@ -120,10 +116,6 @@
 
     .board__square.is-active {
         font-size: 4rem;
-    }
-    
-    .board__square.is-active.x {
-        font-size: 5.5rem;
     }
 
     .board {
