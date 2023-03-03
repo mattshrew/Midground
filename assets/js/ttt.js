@@ -1,7 +1,7 @@
 var gameActive = true;
 const squareIDs = ['top-left', 'top-middle', 'top-right', 'middle-left', 'middle-middle', 'middle-right', 'bottom-left', 'bottom-middle', 'bottom-right'];
 const colours = ['#60A0FF', '#A060FF', '#fff'];
-const players = ['X', 'O'];
+const players = ['x', 'o'];
 var player = 0;
 var board = ['', '', '', '', '', '', '', '', ''];
 
@@ -79,6 +79,6 @@ function resetGame() {
     document.getElementsByClassName('game__result')[0].innerHTML = '';
     for (let i = 0; i < squareIDs.length; i++) {
         document.getElementById(squareIDs[i]).innerHTML = '';
-        document.getElementById(squareIDs[i]).classList.toggle('is-active');
+        document.getElementById(squareIDs[i]).classList.remove('is-active');
     }
 }
