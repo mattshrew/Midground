@@ -1,7 +1,7 @@
 var gameActive = true;
 const squareIDs = ['top-left', 'top-middle', 'top-right', 'middle-left', 'middle-middle', 'middle-right', 'bottom-left', 'bottom-middle', 'bottom-right'];
 const colours = ['#60A0FF', '#A060FF', '#fff'];
-const players = ['✖', 'Ｏ'];
+const players = ['🞪', 'ⵔ'];
 var player = 0;
 var board = ['', '', '', '', '', '', '', '', ''];
 
@@ -12,14 +12,17 @@ window.addEventListener("DOMContentLoaded", function() {
 
     Array.from(squares, function(square) {
         square.addEventListener("click", function() {
-        if (this.innerHTML == '' && gameActive == true) playMove(document.getElementById(this.id));
-        });
+        if (this.innerHTML == '' && gameActive == true) {
+            playMove(document.getElementById(this.id));
+            square.classList.add('is-active');
+        }});
     });
 });
 
 function playMove(square) {
     square.style.color = colours[player];
     square.innerHTML = players[player];
+    if (player == 0) square.classList.add('x');
     board[squareIDs.indexOf(square.id)] = players[player];
     player = (player + 1) % 2;
     document.getElementsByClassName('game__info')[0].style.color = colours[player];
@@ -77,5 +80,7 @@ function resetGame() {
     document.getElementsByClassName('game__result')[0].innerHTML = '';
     for (let i = 0; i < squareIDs.length; i++) {
         document.getElementById(squareIDs[i]).innerHTML = '';
+        document.getElementById(squareIDs[i]).classList.toggle('is-active');
+        document.getElementById(squareIDs[i]).classList.remove('x');
     }
 }

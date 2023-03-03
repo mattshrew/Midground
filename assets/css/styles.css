@@ -164,6 +164,8 @@ body {
         margin: 5px auto;
         transition: all 0.3s ease-in-out;
         background: #fff;
+        display: block;
+        cursor: pointer;
     }
 
     .navbar__item {
@@ -195,11 +197,6 @@ body {
         width: 80%;
         height: 80px;
         margin: 0;
-    }
-
-    .navbar__toggle .bar {
-        display: block;
-        cursor: pointer;
     }
 
     #mobile-menu.is-active .bar:nth-child(2) {
