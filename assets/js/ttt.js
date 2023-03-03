@@ -1,7 +1,7 @@
 var gameActive = true;
 const squareIDs = ['top-left', 'top-middle', 'top-right', 'middle-left', 'middle-middle', 'middle-right', 'bottom-left', 'bottom-middle', 'bottom-right'];
 const colours = ['#60A0FF', '#A060FF', '#fff'];
-const players = ['🞪', 'ⵔ'];
+const players = ['⨯', 'ⵔ'];
 var player = 0;
 var board = ['', '', '', '', '', '', '', '', ''];
 
