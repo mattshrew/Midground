@@ -377,7 +377,7 @@ body {
     width: 100%;
 }
 
-.footer__logo, .social__icons, .website__info{
+.footer__logo, .social__icons, .website__info {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -423,6 +423,7 @@ body {
 
 .website__info {
     color: #f77062;
+    font-size: 1rem;
 }
 
 .website__attribution {
@@ -492,10 +493,6 @@ body {
         padding-top: 2rem;
     }
 
-    #footer__logo {
-        margin-bottom: 1rem;
-    }
-
     .website__info {
         margin-bottom: 2rem;
     }
@@ -514,5 +511,13 @@ body {
         margin: 0;
         padding: 10px;
         width: 100%;
+    }
+
+    #footer__logo {
+        font-size: 1.75rem;
+    }
+
+    .website__info {
+        font-size: 0.625rem;
     }
 }

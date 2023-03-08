@@ -1,38 +1,59 @@
 .tic-tac-toe {
     background-color: #141414;
     color: #141414;
+    text-align: center;
 }
 
 #play {
     margin-bottom: 2rem;
 }
 
-.tic-tac-toe__title {
-    text-align: center;
-    font-size: 3.5rem;
-    background-color: #ff8177;
+#tic-tac-toe__title {
+    position: relative;
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: bold;
     background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
-    background-size: 100%;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
-    margin-top: 50px;
-    margin-bottom: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    margin: 50px auto 1rem;
 }
 
-.game__info, .game__result {
+#tic-tac-toe__title::before {
+    position: absolute;
+    content: attr(data-content);
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    overflow: hidden;
+    transition: width 0.5s;
+    width: 0;
+    white-space: nowrap;
+}
+
+#tic-tac-toe__title:hover::before {
+    width: 100%;
+}
+
+
+#game__info, #game__result {
     color: #fff;
     font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    vertical-align: middle;
     text-align: center;
     margin: 5px;
 }
 
-.game__info.x::first-letter, .game__result.x::first-letter {
-    font-size: 252px;
+#game__info::first-letter, #game__result::first-letter {
+    font-size: 30px;
 }
 
 .game__result {
@@ -51,26 +72,24 @@
 
 .board__square {
     background-color: #333333;
-    padding: 20px;
+    padding: 15px 20px 25px 20px;
     border-radius: 5px;
-    font-size: 3rem;
+    font-size: 4rem;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: font-size 0.5s;
+    transition: 0.5s;
+    transition-property: font-size, padding;
 }
 
 .board__square.is-active {
-    font-size: 5rem;
+    font-size: 6rem;
+    padding: 10px 20px 30px 20px;
 }
 
-.board__square.is-active.x {
-    font-size: 7rem;
-}
-
-.tic-tac-toe__button {
+.tic-tac-toe__reset {
     font-size: 1rem;
     background-image: linear-gradient(to top, #a060ff 0%, #60a0ff 100%);
     padding: 10px 22px;
@@ -87,19 +106,19 @@
     outline: none;
 }
 
-.tic-tac-toe__button:hover {
+.tic-tac-toe__reset:hover {
     background-image: linear-gradient(to top, #c040ff 0%, #8080ff 100%);
     transition: all 0.1s ease;
 }
 
-.tic-tac-toe__button:hover:active {
+.tic-tac-toe__reset:hover:active {
     transform: scale(1.25);
 }
 
 
 @media screen and (max-width: 960px) {
-    .tic-tac-toe__title {
-        font-size: 2.8rem;
+    #tic-tac-toe__title {
+        font-size: 2.2rem;
         margin-top: 6rem;
     }
 
@@ -110,20 +129,18 @@
 }
 
 @media screen and (max-width: 480px) {
-    .tic-tac-toe__title {
-        font-size: 2.5rem;
+    #tic-tac-toe__title {
+        font-size: 2rem;
     }
 
     .board__square {
-        font-size: 2.5rem;
+        font-size: 3rem;
+        padding: 15.5px 20px 24.5px 20px;
     }
 
     .board__square.is-active {
-        font-size: 4rem;
-    }
-    
-    .board__square.is-active.x {
-        font-size: 5.5rem;
+        font-size: 4.5rem;
+        padding: 14px 20px 26px 20px;
     }
 
     .board {

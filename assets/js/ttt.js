@@ -1,20 +1,23 @@
 var gameActive = true;
+var gameMode = "player";
 const squareIDs = ['top-left', 'top-middle', 'top-right', 'middle-left', 'middle-middle', 'middle-right', 'bottom-left', 'bottom-middle', 'bottom-right'];
 const colours = ['#60A0FF', '#A060FF', '#fff'];
-const players = ['⨯', 'ⵔ'];
+const players = ['x', 'o'];
 var player = 0;
 var board = ['', '', '', '', '', '', '', '', ''];
 
 window.addEventListener("DOMContentLoaded", function() {
-    document.getElementsByClassName('game__info')[0].style.color = colours[0];
-    document.getElementsByClassName('game__info')[0].innerHTML = `${players[0]} to move`;
+    document.getElementById('tic-tac-toe__title').addEventListener("click", function() {
+        switchMode(this);
+    });
+    document.getElementById('game__info').style.color = colours[0];
+    document.getElementById('game__info').innerHTML = `${players[0]} to move`;
     let squares = document.querySelectorAll(".board__square");
 
     Array.from(squares, function(square) {
         square.addEventListener("click", function() {
-        if (this.innerHTML == '' && gameActive == true) {
-            playMove(document.getElementById(this.id));
-            square.classList.add('is-active');
+        if (this.innerHTML == '' && gameActive == true && !(player == 1 && gameMode == 'computer')) {
+            playMove(this);
         }});
     });
 });
@@ -22,22 +25,45 @@ window.addEventListener("DOMContentLoaded", function() {
 function playMove(square) {
     square.style.color = colours[player];
     square.innerHTML = players[player];
-    if (player == 0) square.classList.add('x');
+    square.classList.add('is-active');
     board[squareIDs.indexOf(square.id)] = players[player];
     player = (player + 1) % 2;
-    document.getElementsByClassName('game__info')[0].style.color = colours[player];
-    document.getElementsByClassName('game__info')[0].innerHTML = `${players[player]} to move`;
+    document.getElementById('game__info').style.color = colours[player];
+    document.getElementById('game__info').innerHTML = `${players[player]} to move`;
     result = checkResult(board);
-    if (result > 0) endGame(result);
+    if (result > 0) {
+        endGame(result);
+        return;
+    }
+
+    if (gameMode == 'computer' && player == 1) {
+        computerMove();
+    }
+}
+
+function sleep(ms) {  
+    return new Promise(resolve => setTimeout(resolve, ms));  
+}  
+
+async function computerMove() {
+    let empty_squares = []
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] == '') {
+            empty_squares.push(i);
+        }
+    }
+    await sleep(750);
+    move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
+    playMove(document.getElementById(squareIDs[move]));
 }
 
 function checkResult(board) {
-    let empty_squares = 0;
+    let empty = 0;
     for (let i = 0; i < board.length; i++) {
-        if (board[i] == '') empty_squares++;
+        if (board[i] == '') empty++;
     }
 
-    if (empty_squares >= 5) return 0;
+    if (empty >= 5) return 0;
 
     for (let i = 0; i < 2; i++) {
         const p = players[i];
@@ -54,20 +80,20 @@ function checkResult(board) {
         if (board[2] == p && board[4] == p && board[6] == p) return i + 1;
     }
 
-    if (empty_squares == 0) return 3;
+    if (empty == 0) return 3;
 
     return 0;
 }
 
 function endGame(result) {
-    document.getElementsByClassName('game__result')[0].style.color = colours[result - 1];
+    document.getElementById('game__result').style.color = colours[result - 1];
     if (result == 3) {
-        document.getElementsByClassName('game__result')[0].innerHTML = 'Draw!';
+        document.getElementById('game__result').innerHTML = '‎Draw!';
     } else {
-        document.getElementsByClassName('game__result')[0].innerHTML = `${players[result - 1]} has won!`;
+        document.getElementById('game__result').innerHTML = `${players[result - 1]} has won!`;
     }
-    document.getElementsByClassName('game__info')[0].style.color = colours[result - 1];
-    document.getElementsByClassName('game__info')[0].innerHTML = "Game over!";
+    document.getElementById('game__info').style.color = colours[result - 1];
+    document.getElementById('game__info').innerHTML = "‎Game Over!";
     gameActive = false;
 }
 
@@ -75,12 +101,26 @@ function resetGame() {
     player = 0;
     board = ['', '', '', '', '', '', '', '', ''];
     gameActive = true;
-    document.getElementsByClassName('game__info')[0].style.color = colours[0];
-    document.getElementsByClassName('game__info')[0].innerHTML = `${players[0]} to move`;
-    document.getElementsByClassName('game__result')[0].innerHTML = '';
+    document.getElementById('game__info').style.color = colours[0];
+    document.getElementById('game__info').innerHTML = `${players[0]} to move`;
+    document.getElementById('game__result').innerHTML = '';
     for (let i = 0; i < squareIDs.length; i++) {
         document.getElementById(squareIDs[i]).innerHTML = '';
-        document.getElementById(squareIDs[i]).classList.toggle('is-active');
-        document.getElementById(squareIDs[i]).classList.remove('x');
+        document.getElementById(squareIDs[i]).classList.remove('is-active');
     }
+}
+
+
+function switchMode(title) {
+    if (title.innerHTML.slice(10) == "PLAYER") {
+        var newHTML = "PLAYER VS COMPUTER";
+        gameMode = "computer";
+    } else {
+        var newHTML = "PLAYER VS PLAYER";
+        gameMode = "player";
+    }
+
+    resetGame();
+    title.innerHTML = newHTML;
+    title.setAttribute("data-content", newHTML);
 }

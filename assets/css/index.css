@@ -94,7 +94,7 @@ body {
     text-align: center;
 }
 
-#main__img {
+.main__img {
     height: 80%;
     width: 80%;
 }
@@ -112,7 +112,7 @@ body {
 
     .main__content {
         text-align: center;
-        margin-bottom: 4rem;
+        align-content: space-evenly;
     }
 
     .main__content h1 {

@@ -49,12 +49,12 @@
         <div class="main__container">
             <div class="main__content">
                 <h1>GAMES</h1>
-                <h2>> TIC TAC TOE</h2>
+                <h2>&gt; TIC TAC TOE</h2>
                 <p>IN DEVELOPMENT</p>
                 <button class="main__btn"><a href="#play">PLAY NOW</a></button>
             </div>
             <div class="main__img--container">
-                <img src="assets/images/pic1.svg" alt="pic" id="main__img">
+                <img src="assets/images/pic1.svg" alt="pic" class="main__img">
             </div>
         </div>
     </div>
@@ -62,8 +62,9 @@
     <!-- Tic Tac Toe -->
     <div id="play"><br /></div>
     <div class="tic-tac-toe">
-        <h1 class="tic-tac-toe__title">PLAYER VS PLAYER</h1>
-        <div class="game__info"></div>
+        <div id="tic-tac-toe__title" data-content="PLAYER VS PLAYER">PLAYER VS PLAYER</div>
+
+        <p id="game__info"></p>
 
         <div class="board">
             <div class="board__square" id="top-left"></div>
@@ -77,8 +78,8 @@
             <div class="board__square" id="bottom-right"></div>
         </div>
 
-        <div class="game__result"></div>
-        <button class="tic-tac-toe__button" onclick="resetGame()">RESET</button>
+        <p id="game__result"></p>
+        <button class="tic-tac-toe__reset" onclick="resetGame()">RESET</button>
     </div>
 
 
