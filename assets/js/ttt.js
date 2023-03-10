@@ -46,7 +46,7 @@ function sleep(ms) {
 }  
 
 // async function computerMove() {
-//     let empty_squares = []
+//     let empty_squares = [];
 //     for (let i = 0; i < board.length; i++) {
 //         if (board[i] == '') {
 //             empty_squares.push(i);
@@ -59,7 +59,7 @@ function sleep(ms) {
 
 async function computerMove() {
     await sleep(500);
-    let empty_squares = []
+    let empty_squares = [];
      for (let i = 0; i < board.length; i++) {
         if (board[i] == '') {
             empty_squares.push(i);
