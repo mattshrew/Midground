@@ -65,11 +65,9 @@ async function computerMove() {
             empty_squares.push(i);
         }
     }
-    alert(1);
     for (let i = 2; i > 0; i--) {
-        for (let j = 0; i < empty_squares.length; j++) {
+        for (let j = 0; j < empty_squares.length; j++) {
             board[j] = players[player];
-            alert(2);
             if (checkResult(board) == i) {
                 board[j] = '';
                 playMove(document.getElementById(squareIDs[j]));
@@ -79,7 +77,6 @@ async function computerMove() {
             }
         }
     }
-    alert(3);
     move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
     playMove(document.getElementById(squareIDs[move]));    
 }
