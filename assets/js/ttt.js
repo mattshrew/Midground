@@ -45,17 +45,44 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));  
 }  
 
+// async function computerMove() {
+//     let empty_squares = []
+//     for (let i = 0; i < board.length; i++) {
+//         if (board[i] == '') {
+//             empty_squares.push(i);
+//         }
+//     }
+//     await sleep(750);
+//     move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
+//     playMove(document.getElementById(squareIDs[move]));
+// }
+
 async function computerMove() {
+    await sleep(500);
     let empty_squares = []
-    for (let i = 0; i < board.length; i++) {
+     for (let i = 0; i < board.length; i++) {
         if (board[i] == '') {
             empty_squares.push(i);
         }
     }
-    await sleep(750);
+    
+    for (let i = 2; i > 0; i--) {
+        for (let j = 0; i < empty_squares.length; j++) {
+            board[j] = players[player];
+            if (checkResult(board) == i) {
+                board[j] = '';
+                playMove(document.getElementById(squareIDs[j]));
+                return;
+            } else {
+                board[j] = '';
+            }
+        }
+    }
+    
     move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
-    playMove(document.getElementById(squareIDs[move]));
+    playMove(document.getElementById(squareIDs[move]));    
 }
+
 
 function checkResult(board) {
     let empty = 0;
