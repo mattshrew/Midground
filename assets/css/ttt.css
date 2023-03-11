@@ -20,7 +20,7 @@
     -moz-text-fill-color: transparent;
     cursor: pointer;
     overflow: hidden;
-    margin: 50px auto 1rem;
+    margin: 50px auto 5px;
 }
 
 #tic-tac-toe__title::before {
@@ -42,6 +42,44 @@
 #tic-tac-toe__title:hover::before {
     width: 100%;
 }
+
+
+#tic-tac-toe__difficulty {
+    position: relative;
+    display: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+#tic-tac-toe__difficulty::before {
+    position: absolute;
+    content: attr(data-content);
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    overflow: hidden;
+    transition: width 0.5s;
+    width: 0;
+    white-space: nowrap;
+}
+
+#tic-tac-toe__difficulty:hover::before {
+    width: 100%;
+}
+
 
 
 #game__info, #game__result {

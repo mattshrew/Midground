@@ -1,5 +1,6 @@
 var gameActive = true;
 var gameMode = "player";
+var difficulty = "easy";
 const squareIDs = ['top-left', 'top-middle', 'top-right', 'middle-left', 'middle-middle', 'middle-right', 'bottom-left', 'bottom-middle', 'bottom-right'];
 const colours = ['#60A0FF', '#A060FF', '#fff'];
 const players = ['x', 'o'];
@@ -10,6 +11,11 @@ window.addEventListener("DOMContentLoaded", function() {
     document.getElementById('tic-tac-toe__title').addEventListener("click", function() {
         switchMode(this);
     });
+
+    document.getElementById('tic-tac-toe__difficulty').addEventListener("click", function() {
+        switchDifficulty(this);
+    });
+
     document.getElementById('game__info').style.color = colours[0];
     document.getElementById('game__info').innerHTML = `${players[0]} to move`;
     let squares = document.querySelectorAll(".board__square");
@@ -37,7 +43,9 @@ function playMove(square) {
     }
 
     if (gameMode == 'computer' && player == 1) {
-        computerMove();
+        if (difficulty == 'easy') computerMove1();
+        else if (difficulty == 'medium') computerMove2();
+        else if (difficulty == 'impossible') computerMove3();
     }
 }
 
@@ -45,43 +53,43 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));  
 }  
 
-// async function computerMove() {
-//     let empty_squares = [];
-//     for (let i = 0; i < board.length; i++) {
-//         if (board[i] == '') {
-//             empty_squares.push(i);
-//         }
-//     }
-//     await sleep(750);
-//     move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
-//     playMove(document.getElementById(squareIDs[move]));
-// }
+async function computerMove1() {
+    let empty_squares = [];
+    for (let i = 0; i < board.length; i++) {
+        if (board[i] == '') {
+            empty_squares.push(i);
+        }
+    }
+    await sleep(750);
+    move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
+    playMove(document.getElementById(squareIDs[move]));
+}
 
-// async function computerMove() {
-//     await sleep(500);
-//     let empty_squares = [];
-//      for (let i = 0; i < board.length; i++) {
-//         if (board[i] == '') {
-//             empty_squares.push(i);
-//         }
-//     }
-//     for (let i = 2; i > 0; i--) {
-//         for (let j = 0; j < empty_squares.length; j++) {
-//             board[empty_squares[j]] = players[i-1];
-//             if (checkResult(board) == i) {
-//                 board[empty_squares[j]] = '';
-//                 playMove(document.getElementById(squareIDs[empty_squares[j]]));
-//                 return;
-//             } else {
-//                 board[empty_squares[j]] = '';
-//             }
-//         }
-//     }
-//     move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
-//     playMove(document.getElementById(squareIDs[move]));    
-// }
+async function computerMove2() {
+    await sleep(500);
+    let empty_squares = [];
+     for (let i = 0; i < board.length; i++) {
+        if (board[i] == '') {
+            empty_squares.push(i);
+        }
+    }
+    for (let i = 2; i > 0; i--) {
+        for (let j = 0; j < empty_squares.length; j++) {
+            board[empty_squares[j]] = players[i-1];
+            if (checkResult(board) == i) {
+                board[empty_squares[j]] = '';
+                playMove(document.getElementById(squareIDs[empty_squares[j]]));
+                return;
+            } else {
+                board[empty_squares[j]] = '';
+            }
+        }
+    }
+    move = empty_squares[Math.floor(Math.random()*empty_squares.length)];
+    playMove(document.getElementById(squareIDs[move]));    
+}
 
-async function computerMove() {
+async function computerMove3() {
     await sleep(500);
     let empty_squares = [];
     let empty_corners = [];
@@ -103,11 +111,8 @@ async function computerMove() {
             playMove(document.getElementById(squareIDs[choices[Math.floor(Math.random()*choices.length)]]));
             return;
         case 8:
-            if (board[4] == '') {
-                playMove(document.getElementById(squareIDs[4]));
-            } else {
-                playMove(document.getElementById(squareIDs[empty_corners[Math.floor(Math.random()*empty_corners.length)]]));
-            }
+            if (board[4] == '') playMove(document.getElementById(squareIDs[4]));
+            else playMove(document.getElementById(squareIDs[empty_corners[Math.floor(Math.random()*empty_corners.length)]]));
             return;
         case 6:
             if (board[4] == players[0]) {
@@ -306,7 +311,7 @@ function endGame(result) {
         document.getElementById('game__result').innerHTML = '‎Draw!';
     } else {
         document.getElementById('game__result').innerHTML = `${players[result - 1]} has won!`;
-        if (gameMode == "computer" && result == 1) document.getElementById('game__result').innerHTML = '‎Please tell me how..';
+        if (gameMode == "computer" && difficulty == "impossible" && result == 1) document.getElementById('game__result').innerHTML = '‎Please tell me how..';
     }
     document.getElementById('game__info').style.color = colours[result - 1];
     document.getElementById('game__info').innerHTML = "‎Game Over!";
@@ -339,4 +344,23 @@ function switchMode(title) {
     resetGame();
     title.innerHTML = newHTML;
     title.setAttribute("data-content", newHTML);
+    if (gameMode == "computer") document.getElementById("tic-tac-toe__difficulty").style.display = "inline-block";
+    else document.getElementById("tic-tac-toe__difficulty").style.display = "none";
+}
+
+function switchDifficulty(diff) {
+    if (diff.innerHTML.slice(12) == "EASY") {
+        var newHTML = "DIFFICULTY: MEDIUM";
+        difficulty = "medium";
+    } else if (diff.innerHTML.slice(12) == "MEDIUM") {
+        var newHTML = "DIFFICULTY: IMPOSSIBLE";
+        difficulty = "impossible";
+    } else {
+        var newHTML = "DIFFICULTY: EASY";
+        difficulty = "easy";
+    }
+
+    resetGame();
+    diff.innerHTML = newHTML;
+    diff.setAttribute("data-content", newHTML);
 }
