@@ -1,28 +1,23 @@
 var gameActive = true;
 var gameMode = "player";
 var difficulty = "easy";
-const squareIDs = ['top-left', 'top-middle', 'top-right', 'middle-left', 'middle-middle', 'middle-right', 'bottom-left', 'bottom-middle', 'bottom-right'];
-const colours = ['#60A0FF', '#A060FF', '#fff'];
-const players = ['x', 'o'];
+const squareIDs = ["top-left", "top-middle", "top-right", "middle-left", "middle-middle", "middle-right", "bottom-left", "bottom-middle", "bottom-right"];
+const colours = ["#60A0FF", "#A060FF", "#fff"];
+const players = ["x", "o"];
 var player = 0;
 var board = ['', '', '', '', '', '', '', '', ''];
 
 window.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('tic-tac-toe__title').addEventListener("click", function() {
-        switchMode(this);
-    });
+    document.getElementById("tic-tac-toe__title").addEventListener("click", function() { switchMode(this); });
+    document.getElementById("tic-tac-toe__difficulty").addEventListener("click", function() { switchDifficulty(this); });
 
-    document.getElementById('tic-tac-toe__difficulty').addEventListener("click", function() {
-        switchDifficulty(this);
-    });
-
-    document.getElementById('game__info').style.color = colours[0];
-    document.getElementById('game__info').innerHTML = `${players[0]} to move`;
+    document.getElementById("game__info").style.color = colours[0];
+    document.getElementById("game__info").innerHTML = `${players[0]} to move`;
     let squares = document.querySelectorAll(".board__square");
 
     Array.from(squares, function(square) {
         square.addEventListener("click", function() {
-        if (this.innerHTML == '' && gameActive == true && !(player == 1 && gameMode == 'computer')) {
+        if (this.innerHTML == '' && gameActive == true && !(player == 1 && gameMode == "computer")) {
             playMove(this);
         }});
     });
@@ -31,21 +26,21 @@ window.addEventListener("DOMContentLoaded", function() {
 function playMove(square) {
     square.style.color = colours[player];
     square.innerHTML = players[player];
-    square.classList.add('is-active');
+    square.classList.add("is-active");
     board[squareIDs.indexOf(square.id)] = players[player];
     player = (player + 1) % 2;
-    document.getElementById('game__info').style.color = colours[player];
-    document.getElementById('game__info').innerHTML = `${players[player]} to move`;
+    document.getElementById("game__info").style.color = colours[player];
+    document.getElementById("game__info").innerHTML = `${players[player]} to move`;
     result = checkResult(board);
     if (result > 0) {
         endGame(result);
         return;
     }
 
-    if (gameMode == 'computer' && player == 1) {
-        if (difficulty == 'easy') computerMove1();
-        else if (difficulty == 'medium') computerMove2();
-        else if (difficulty == 'impossible') computerMove3();
+    if (gameMode == "computer" && player == 1) {
+        if (difficulty == "easy") computerMove1();
+        else if (difficulty == "medium") computerMove2();
+        else if (difficulty == "impossible") computerMove3();
     }
 }
 
@@ -116,7 +111,7 @@ async function computerMove3() {
             return;
         case 6:
             if (board[4] == players[0]) {
-                if ((board[0] != '' && board[8] != '') || (board[2] != '' && board[6] != '')) {
+                if ((board[0] != " && board[8] != ") || (board[2] != " && board[6] != ")) {
                     playMove(document.getElementById(squareIDs[empty_corners[Math.floor(Math.random()*empty_corners.length)]]));
                     return;
                 } else if (board[1] == players[0]) {
@@ -306,15 +301,15 @@ function checkResult(board) {
 }
 
 function endGame(result) {
-    document.getElementById('game__result').style.color = colours[result - 1];
+    document.getElementById("game__result").style.color = colours[result - 1];
     if (result == 3) {
-        document.getElementById('game__result').innerHTML = '‎Draw!';
+        document.getElementById("game__result").innerHTML = "‎Draw!";
     } else {
-        document.getElementById('game__result').innerHTML = `${players[result - 1]} has won!`;
-        if (gameMode == "computer" && difficulty == "impossible" && result == 1) document.getElementById('game__result').innerHTML = '‎Please tell me how..';
+        document.getElementById("game__result").innerHTML = `${players[result - 1]} has won!`;
+        if (gameMode == "computer" && difficulty == "impossible" && result == 1) document.getElementById("game__result").innerHTML = "‎Please tell me how..";
     }
-    document.getElementById('game__info').style.color = colours[result - 1];
-    document.getElementById('game__info').innerHTML = "‎Game Over!";
+    document.getElementById("game__info").style.color = colours[result - 1];
+    document.getElementById("game__info").innerHTML = "‎Game Over!";
     gameActive = false;
 }
 
@@ -322,12 +317,12 @@ function resetGame() {
     player = 0;
     board = ['', '', '', '', '', '', '', '', ''];
     gameActive = true;
-    document.getElementById('game__info').style.color = colours[0];
-    document.getElementById('game__info').innerHTML = `${players[0]} to move`;
-    document.getElementById('game__result').innerHTML = '';
+    document.getElementById("game__info").style.color = colours[0];
+    document.getElementById("game__info").innerHTML = `${players[0]} to move`;
+    document.getElementById("game__result").innerHTML = '';
     for (let i = 0; i < squareIDs.length; i++) {
         document.getElementById(squareIDs[i]).innerHTML = '';
-        document.getElementById(squareIDs[i]).classList.remove('is-active');
+        document.getElementById(squareIDs[i]).classList.remove("is-active");
     }
 }
 

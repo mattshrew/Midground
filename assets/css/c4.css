@@ -1,0 +1,217 @@
+.connect-4 {
+    background-color: #141414;
+    color: #141414;
+    text-align: center;
+}
+
+#play {
+    margin-bottom: 2rem;
+}
+
+#connect-4__title {
+    position: relative;
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    margin: 50px auto 5px;
+}
+
+#connect-4__title::before {
+    position: absolute;
+    content: attr(data-content);
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    overflow: hidden;
+    transition: width 0.5s;
+    width: 0;
+    white-space: nowrap;
+}
+
+#connect-4__title:hover::before {
+    width: 100%;
+}
+
+
+#connect-4__difficulty {
+    position: relative;
+    display: none;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+#connect-4__difficulty::before {
+    position: absolute;
+    content: attr(data-content);
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    overflow: hidden;
+    transition: width 0.5s;
+    width: 0;
+    white-space: nowrap;
+}
+
+#connect-4__difficulty:hover::before {
+    width: 100%;
+}
+
+#game__info, #game__result {
+    color: #fff;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: center;
+    margin: 5px;
+}
+
+.game__result {
+    margin-bottom: 10px;
+}
+
+/* .board {
+    display: grid;
+    grid-template-columns: 9rem 9rem 9rem;
+    grid-template-rows: 9rem 9rem 9rem;
+    grid-gap: 5px;
+    justify-content: center;
+    background-color: #141414;
+    padding: 10px;
+}
+
+.board__square {
+    background-color: #333333;
+    padding: 15px 20px 25px 20px;
+    border-radius: 5px;
+    font-size: 4rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+    transition-property: font-size, padding;
+}
+
+.board__square.is-active {
+    font-size: 6rem;
+    padding: 10px 20px 30px 20px;
+} */
+
+
+.board {
+    display: table;
+    box-sizing: border-box;
+    border-color: white;
+    border-spacing: 6px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 3;
+}
+
+.board tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.board__row {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.board__cell {
+    display: table-cell;
+    height: 48px;
+    width: 48px;
+    position: relative;
+    vertical-align: top;
+    background-color: #333333;
+    border-radius: 2rem;
+    border: solid 2px #444444;
+    cursor: pointer;
+}
+
+.connect-4__reset {
+    font-size: 1rem;
+    background-image: linear-gradient(to top, #a060ff 0%, #60a0ff 100%);
+    padding: 10px 22px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.4s;
+    outline: none;
+}
+
+.connect-4__reset:hover {
+    background-image: linear-gradient(to top, #c040ff 0%, #8080ff 100%);
+    transition: all 0.1s ease;
+}
+
+.connect-4__reset:hover:active {
+    transform: scale(1.25);
+}
+
+
+@media screen and (max-width: 960px) {
+    #connect-4__title {
+        font-size: 2.2rem;
+        margin-top: 6rem;
+    }
+
+    .board {
+        grid-template-columns: 8rem 8rem 8rem;
+        grid-template-rows: 8rem 8rem 8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #connect-4__title {
+        font-size: 2rem;
+    }
+
+    .board__square {
+        font-size: 3rem;
+        padding: 15.5px 20px 24.5px 20px;
+    }
+
+    .board__square.is-active {
+        font-size: 4.5rem;
+        padding: 14px 20px 26px 20px;
+    }
+
+    .board {
+        grid-template-columns: 7rem 7rem 7rem;
+        grid-template-rows: 7rem 7rem 7rem;
+    }
+}
