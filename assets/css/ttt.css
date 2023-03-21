@@ -157,7 +157,7 @@
 @media screen and (max-width: 960px) {
     #tic-tac-toe__title {
         font-size: 2.2rem;
-        margin-top: 6rem;
+        margin-top: 2rem;
     }
 
     .board {
