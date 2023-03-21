@@ -20,7 +20,7 @@
     -moz-text-fill-color: transparent;
     cursor: pointer;
     overflow: hidden;
-    margin: 50px auto 5px;
+    margin: 0 auto 5px;
 }
 
 #tic-tac-toe__title::before {

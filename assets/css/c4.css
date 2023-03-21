@@ -20,7 +20,7 @@
     -moz-text-fill-color: transparent;
     cursor: pointer;
     overflow: hidden;
-    margin: 50px auto 5px;
+    margin: 0 auto 5px;
 }
 
 #connect-4__title::before {
@@ -92,42 +92,12 @@
     margin-bottom: 10px;
 }
 
-/* .board {
-    display: grid;
-    grid-template-columns: 9rem 9rem 9rem;
-    grid-template-rows: 9rem 9rem 9rem;
-    grid-gap: 5px;
-    justify-content: center;
-    background-color: #141414;
-    padding: 10px;
-}
-
-.board__square {
-    background-color: #333333;
-    padding: 15px 20px 25px 20px;
-    border-radius: 5px;
-    font-size: 4rem;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.5s;
-    transition-property: font-size, padding;
-}
-
-.board__square.is-active {
-    font-size: 6rem;
-    padding: 10px 20px 30px 20px;
-} */
-
-
 .board {
     display: table;
     box-sizing: border-box;
     border-color: white;
     border-spacing: 6px;
-    margin: 0 auto;
+    margin: 1rem auto;
     position: relative;
     z-index: 3;
 }
@@ -146,8 +116,8 @@
 
 .board__cell {
     display: table-cell;
-    height: 48px;
-    width: 48px;
+    height: 4rem;
+    width: 4rem;
     position: relative;
     vertical-align: top;
     background-color: #333333;
@@ -186,12 +156,12 @@
 @media screen and (max-width: 960px) {
     #connect-4__title {
         font-size: 2.2rem;
-        margin-top: 6rem;
+        margin-top: 2rem;
     }
 
-    .board {
-        grid-template-columns: 8rem 8rem 8rem;
-        grid-template-rows: 8rem 8rem 8rem;
+    .board__cell {
+        height: 3.5rem;
+        width: 3.5rem;
     }
 }
 
@@ -200,18 +170,8 @@
         font-size: 2rem;
     }
 
-    .board__square {
-        font-size: 3rem;
-        padding: 15.5px 20px 24.5px 20px;
-    }
-
-    .board__square.is-active {
-        font-size: 4.5rem;
-        padding: 14px 20px 26px 20px;
-    }
-
-    .board {
-        grid-template-columns: 7rem 7rem 7rem;
-        grid-template-rows: 7rem 7rem 7rem;
+    .board__cell {
+        height: 3rem;
+        width: 3rem;
     }
 }

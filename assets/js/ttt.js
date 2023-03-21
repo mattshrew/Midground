@@ -31,7 +31,7 @@ function playMove(square) {
     player = (player + 1) % 2;
     document.getElementById("game__info").style.color = colours[player];
     document.getElementById("game__info").innerHTML = `${players[player]} to move`;
-    result = checkResult(board);
+    let result = checkResult(board);
     if (result > 0) {
         endGame(result);
         return;
