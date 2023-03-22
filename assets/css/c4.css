@@ -16,7 +16,7 @@
     -moz-text-fill-color: transparent;
     cursor: pointer;
     overflow: hidden;
-    margin: 0 auto 5px;
+    margin: 3vh auto 5px;
 }
 
 #connect-4__title::before {
