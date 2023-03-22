@@ -77,6 +77,10 @@ body {
     height: 100%;
 }
 
+.navbar__links--long {
+    width: 8rem;
+}
+
 .navbar__links--current {
     color: #f77062;
 }
@@ -174,7 +178,7 @@ body {
 
     .navbar__links {
         text-align: center;
-        padding: 2rem;
+        padding: 1rem 0 2rem;
         width: 100%;
         display: table;
     }

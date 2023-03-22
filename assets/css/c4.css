@@ -4,10 +4,6 @@
     text-align: center;
 }
 
-#play {
-    margin-bottom: 2rem;
-}
-
 #connect-4__title {
     position: relative;
     display: inline-block;
@@ -122,7 +118,7 @@
     vertical-align: top;
     background-color: #333333;
     border-radius: 2rem;
-    border: solid 2px #444444;
+    border: solid 2px #303030;
     cursor: pointer;
 }
 

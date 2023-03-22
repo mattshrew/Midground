@@ -4,10 +4,6 @@
     text-align: center;
 }
 
-#play {
-    margin-bottom: 2rem;
-}
-
 #tic-tac-toe__title {
     position: relative;
     display: inline-block;
