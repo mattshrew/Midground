@@ -176,6 +176,7 @@ function resetGame() {
         cells[i].style.backgroundColor = colours[3];
         cells[i].classList.remove("p1");
         cells[i].classList.remove("p2");
+        cells[i].classList.remove("is-active");
     }
 }
 
