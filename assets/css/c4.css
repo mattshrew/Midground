@@ -24,7 +24,7 @@
     content: attr(data-content);
     top: 0;
     left: 0;
-    background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+    background-image: linear-gradient(to top, #b721ff 0%, #20E0FF 100%);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -61,7 +61,7 @@
     content: attr(data-content);
     top: 0;
     left: 0;
-    background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+    background-image: linear-gradient(to top, #b721ff 0%, #20E0FF 100%);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -120,6 +120,10 @@
     border-radius: 2rem;
     border: solid 2px #303030;
     cursor: pointer;
+}
+
+.board__cell.is-active {
+    transition: background-color 1s;
 }
 
 .connect-4__reset {

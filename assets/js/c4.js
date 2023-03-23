@@ -1,7 +1,7 @@
 var gameActive = true;
 var gameMode = "player";
 // var difficulty = "easy";
-const colours = ["#60A0FF", "#A060FF", "#fff", "#333333"];
+const colours = ["#60A0FF", "#A060FF", "#fff", "#333333", "#60A0FF90", "#A060FF90"];
 const players = ["P1", "P2"];
 const directions = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
 var player = 0;
@@ -21,15 +21,46 @@ window.addEventListener("DOMContentLoaded", function() {
     document.getElementById("game__info").innerHTML = `${players[0]} to move`;
 
     let cells = document.querySelectorAll(".board__cell");
+    let columns = [];
+    for (let i = 0; i < 7; i++) {
+        columns.push(Array.from(document.querySelectorAll(`[data-col="${i}"]`)).reverse())
+    }
 
     Array.from(cells, function(cell) {
         cell.addEventListener("click", function() {
             if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
                 if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                    let column = columns[cell.getAttribute("data-col")];
+                    column.every(function(newCell) {
+                        if (newCell == cell || isEmpty(newCell)) playMove(newCell);
+                        else return true;
+                    });
+                }
+            }
+        });
+    });
+
+    Array.from(cells, function(cell) {
+        cell.addEventListener("mouseover", function() {
+            if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
+                if (gameActive == true && !(player == 1 && gameMode == "computer")) {
                     let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
                     column.every(function(newCell) {
-                        if (newCell == cell) playMove(cell);
-                        else if (isEmpty(newCell)) return false;
+                        if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = colours[player+4];
+                        else return true;
+                    });
+                }
+            }
+        });
+    });
+
+    Array.from(cells, function(cell) {
+        cell.addEventListener("mouseout", function() {
+            if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
+                if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                    let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
+                    column.every(function(newCell) {
+                        if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = "#333333";
                         else return true;
                     });
                 }
@@ -51,8 +82,9 @@ function isEmpty(cell) {
 
 
 function playMove(cell) {
+    cell.classList.add("is-active");
     cell.style.backgroundColor = colours[player];
-    cell.classList.add(`p${player+1}`)
+    cell.classList.add(`p${player+1}`);
     row = cell.getAttribute("data-row");
     col = cell.getAttribute("data-col");
     board[row][col] = player;
