@@ -1,6 +1,6 @@
 var gameActive = true;
 var gameMode = "player";
-// var difficulty = "easy";
+var difficulty = "easy";
 const colours = ["#60A0FF", "#A060FF", "#fff", "#333333", "#60A0FF90", "#A060FF90"];
 const players = ["P1", "P2"];
 const directions = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
@@ -14,61 +14,68 @@ var board = [
     [-1, -1, -1, -1, -1, -1, -1]
 ];
 
-window.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("connect-4__title").addEventListener("click", function() { switchMode(this); });
+if (typeof window !== 'undefined') {
+    window.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("connect-4__title").addEventListener("click", function() { switchMode(this); });
+        document.getElementById("connect-4__difficulty").addEventListener("click", function() { switchDifficulty(this); });
+        document.getElementById("game__info").style.color = colours[0];
+        document.getElementById("game__info").innerHTML = `${players[0]} to move`;
+    
+        let cells = document.querySelectorAll(".board__cell");
+        let columns = [];
+        for (let i = 0; i < 7; i++) {
+            columns.push(Array.from(document.querySelectorAll(`[data-col="${i}"]`)).reverse())
+        }
+    
+        Array.from(cells, function(cell) {
+            cell.addEventListener("click", function() {
+                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
+                    if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                        let column = columns[cell.getAttribute("data-col")];
+                        column.every(function(newCell) {
+                            if (newCell == cell || isEmpty(newCell)) playMove(newCell);
+                            else return true;
+                        });
+                    }
+                }
+            });
+        });
+    
+        Array.from(cells, function(cell) {
+            cell.addEventListener("mouseover", function() {
+                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
+                    if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                        let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
+                        column.every(function(newCell) {
+                            if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = colours[player+4];
+                            else return true;
+                        });
+                    }
+                }
+            });
+        });
+    
+        Array.from(cells, function(cell) {
+            cell.addEventListener("mouseout", function() {
+                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
+                    if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                        let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
+                        column.every(function(newCell) {
+                            if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = "#333333";
+                            else return true;
+                        });
+                    }
+                }
+            });
+        });
+    });
+}
 
-    document.getElementById("game__info").style.color = colours[0];
-    document.getElementById("game__info").innerHTML = `${players[0]} to move`;
-
-    let cells = document.querySelectorAll(".board__cell");
-    let columns = [];
-    for (let i = 0; i < 7; i++) {
-        columns.push(Array.from(document.querySelectorAll(`[data-col="${i}"]`)).reverse())
+function printBoard() {
+    for (let row of board) {
+        console.log(row);
     }
-
-    Array.from(cells, function(cell) {
-        cell.addEventListener("click", function() {
-            if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
-                if (gameActive == true && !(player == 1 && gameMode == "computer")) {
-                    let column = columns[cell.getAttribute("data-col")];
-                    column.every(function(newCell) {
-                        if (newCell == cell || isEmpty(newCell)) playMove(newCell);
-                        else return true;
-                    });
-                }
-            }
-        });
-    });
-
-    Array.from(cells, function(cell) {
-        cell.addEventListener("mouseover", function() {
-            if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
-                if (gameActive == true && !(player == 1 && gameMode == "computer")) {
-                    let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
-                    column.every(function(newCell) {
-                        if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = colours[player+4];
-                        else return true;
-                    });
-                }
-            }
-        });
-    });
-
-    Array.from(cells, function(cell) {
-        cell.addEventListener("mouseout", function() {
-            if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
-                if (gameActive == true && !(player == 1 && gameMode == "computer")) {
-                    let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
-                    column.every(function(newCell) {
-                        if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = "#333333";
-                        else return true;
-                    });
-                }
-            }
-        });
-    });
-});
-
+}
 
 function isEmpty(cell) {
     // document.querySelector(`[data-row="${cell[0]}"][data-col="${cell[1]}"]`);
@@ -97,7 +104,76 @@ function playMove(cell) {
         endGame(result);
         return;
     }
+
+    if (gameMode == "computer" && player == 1) {
+        if (difficulty == "easy") computerMove1();
+        else if (difficulty == "medium") computerMove2();
+    }
 }
+
+function sleep(ms) {  
+    return new Promise(resolve => setTimeout(resolve, ms));  
+}  
+
+async function computerMove1() {
+    let possible_moves = [];
+    for (let col = 0; col < board[0].length; col++) {
+        for (let row = 0; row < board.length; row++) {
+            if (isEmpty([row, col])) {
+                possible_moves.push([row, col]);
+                break;
+            }
+        }
+    }
+
+    await sleep(750);
+    let choice = Math.floor(Math.random()*possible_moves.length);
+    let move = possible_moves[choice];
+    playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[1]}"]`));
+}
+
+async function computerMove2() {
+    let possible_moves = [];
+    for (let col = 0; col < board[0].length; col++) {
+        for (let row = 0; row < board.length; row++) {
+            if (isEmpty([row, col])) {
+                possible_moves.push([row, col]);
+                break;
+            }
+        }
+    }
+
+    await sleep(750);
+
+    for (let i = 1; i >= 0; i--) {
+        for (let j = 0; j < possible_moves.length; j++) {
+            board[possible_moves[j][0]][possible_moves[j][1]] = i;
+            if (checkResult(board) == i+1) {
+                board[possible_moves[j][0]][possible_moves[j][1]] = -1;
+                playMove(document.querySelector(`[data-row="${possible_moves[j][0]}"][data-col="${possible_moves[j][1]}"]`));
+                return;
+            } else {
+                board[possible_moves[j][0]][possible_moves[j][1]] = -1;
+            }
+        }
+    }
+    let move;
+    for (let i = 1; i >= 0; i--) {
+        for (let j = 5; j <= board[0].length; j++) {
+            let sub = board[0].slice(j-5, j).join('');
+            if (sub == `-1${i}${i}-1-1`) move = [j-2, j-5];
+            else if (sub == `-1-1${i}${i}-1`) move = [j-1, j-4];
+            else if (sub == `-1${i}-1${i}-1`) move = [j-1, j-3, j-5];
+            else continue;
+            playMove(document.querySelector(`[data-row="0"][data-col="${move[Math.floor(Math.random()*2)]}"]`));
+            return;
+        }
+    }
+    
+    move = possible_moves[Math.floor(Math.random()*possible_moves.length)];
+    playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[1]}"]`));
+}
+
 
 
 function checkResult(board) {
@@ -109,7 +185,7 @@ function checkResult(board) {
     }
     
     
-    if (empty > 35) return 0;
+    if (empty > 36) return 0;
     else if (empty == 0) return 3;
 
     function searchC4(row, col, count=1, direction) {
@@ -192,6 +268,20 @@ function switchMode(title) {
     resetGame();
     title.innerHTML = newHTML;
     title.setAttribute("data-content", newHTML);
-    // if (gameMode == "computer") document.getElementById("connect-4__difficulty").style.display = "inline-block";
-    // else document.getElementById("connect-4__difficulty").style.display = "none";
+    if (gameMode == "computer") document.getElementById("connect-4__difficulty").style.display = "inline-block";
+    else document.getElementById("connect-4__difficulty").style.display = "none";
+}
+
+function switchDifficulty(diff) {
+    if (diff.innerHTML.slice(12) == "EASY") {
+        var newHTML = "DIFFICULTY: MEDIUM";
+        difficulty = "medium";
+    } else {
+        var newHTML = "DIFFICULTY: EASY";
+        difficulty = "easy";
+    }
+
+    resetGame();
+    diff.innerHTML = newHTML;
+    diff.setAttribute("data-content", newHTML);
 }
