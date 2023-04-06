@@ -108,6 +108,7 @@ function playMove(cell) {
     if (gameMode == "computer" && player == 1) {
         if (difficulty == "easy") computerMove1();
         else if (difficulty == "medium") computerMove2();
+        else if (difficulty == "hard") computerMove3();
     }
 }
 
@@ -174,6 +175,70 @@ async function computerMove2() {
     playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[1]}"]`));
 }
 
+async function computerMove3() {
+    let possible_moves = [];
+
+    for (let col = 0; col < board[0].length; col++) {
+        for (let row = 0; row < board.length; row++) {
+            if (isEmpty([row, col])) {
+                possible_moves.push([row, col]);
+                break;
+            }
+        }
+    }
+
+    function score(board) {
+        const scoring = {0: 0, 1: 1, 2: 3, 3: 10, 4:99999};
+        let lines = [];
+        let scores = [0, 0];
+
+
+        for (let i = board.length - 1; i >= 0; i--) {
+            for (let j = 0; j < board[i].length; j++) {
+                if (isEmpty([i, j])) continue;
+                res = searchC4(i, j, [[i, j]]);
+
+                let sortedPath = res[1].sort(function(a, b) {
+                    if (b[0] == a[0]) return b[1] - a[1];
+                    return b[0] - a[0]; 
+                });
+
+                if (!lines.includes(sortedPath)) {
+                    lines.push(sortedPath);
+                    let p = board[sortedPath[0][0]][sortedPath[0][1]];
+                    scores[p] += scoring[res[0]] / res[2];
+                } 
+                
+            }
+        }
+        return scores;
+    }
+
+    let scores = new Proxy({}, {
+        get: (target, name) => name in target ? target[name] : 0
+      })
+
+    for (let i = 1; i >= 0; i--) {
+        for (let j = 0; j < possible_moves.length; j++) {
+            board[possible_moves[j][0]][possible_moves[j][1]] = i;
+            let res = score(board);
+            scores[possible_moves[j]] = scores[possible_moves[j]] + (res[i] - res[(i + 1) % 2]);
+            board[possible_moves[j][0]][possible_moves[j][1]] = -1;
+        }
+    }
+
+    console.log(scores);
+    let moves = [];
+    let max = Math.max.apply(Math, Object.values(scores));
+
+    for (const key in scores) {
+        if (scores[key] == max) moves.push(key);
+    }
+
+    let move = moves[Math.floor(Math.random()*moves.length)];
+    console.log(document.querySelector(`[data-row="${move[0]}"][data-col="${move[2]}"]`));
+    playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[2]}"]`));
+}
 
 
 function checkResult(board) {
@@ -184,47 +249,52 @@ function checkResult(board) {
         }
     }
     
-    
     if (empty > 36) return 0;
     else if (empty == 0) return 3;
-
-    function searchC4(row, col, count=1, direction) {
-        if (count == 4) return true;
-        // alert(`${row} ${col} ${count} ${direction}`);
-        if (direction === undefined) {
-            for (const dir of directions) {
-                let r = row + dir[0];
-                let c = col + dir[1];
-                if ((r >= 0 && r < board.length) && (c >= 0 && c < board[0].length)) {
-                    if (board[r][c] == board[row][col]) {
-                        if (searchC4(r, c, count+1, dir)) return true;
-                    }
-                }
-            }
-        } else {
-            let r = row + direction[0];
-            let c = col + direction[1];
-            if ((r >= 0 && r < board.length) && (c >= 0 && c < board[0].length)) {
-                if (board[r][c] == board[row][col]) {
-                    if (searchC4(r, c, count+1, direction)) return true;
-                }
-            } else {
-                return false;
-            }
-        }
-        
-    }
 
     for (let i = board.length - 1; i >= 0; i--) {
         for (let j = 0; j < board[i].length; j++) {
             if (isEmpty([i, j])) continue;
-            if (searchC4(i, j)) return board[i][j] + 1;
+            if (searchC4(i, j) == 4) return board[i][j] + 1;
         }
     }
 
     return 0;
 }
 
+function searchC4(row, col, path, count=1, direction) {
+    // console.log(`${row} ${col} ${count} ${direction}`);
+    if (count == 4) {
+        if (path === undefined) return count;
+        else return [count, path, 1];
+    }
+    if (direction === undefined) {
+        for (const dir of directions) {
+            let r = row + dir[0];
+            let c = col + dir[1];
+            if ((r >= 0 && r < board.length) && (c >= 0 && c < board[0].length)) {
+                if (board[r][c] == board[row][col]) {
+                    if (path !== undefined) path.push([r, c]);
+                    return searchC4(r, c, path, count+1, dir);
+                }
+            }
+        }
+    } else {
+        let r = row + direction[0];
+        let c = col + direction[1];
+        if ((r >= 0 && r < board.length) && (c >= 0 && c < board[0].length)) {
+            if (board[r][c] == board[row][col]) {
+                if (path !== undefined) path.push([r, c]);
+                return searchC4(r, c, path, count+1, direction);
+            }
+        } else {
+            if (path === undefined) return count;
+            else return [count, path, 100]; // hit edge
+        }
+    }
+    if (path === undefined) return count;
+    else return [count, path, 1];
+}
 
 function endGame(result) {
     document.getElementById("game__result").style.color = colours[result - 1];
@@ -276,6 +346,9 @@ function switchDifficulty(diff) {
     if (diff.innerHTML.slice(12) == "EASY") {
         var newHTML = "DIFFICULTY: MEDIUM";
         difficulty = "medium";
+    } else if (diff.innerHTML.slice(12) == "MEDIUM") {
+        var newHTML = "DIFFICULTY: HARD";
+        difficulty = "hard";
     } else {
         var newHTML = "DIFFICULTY: EASY";
         difficulty = "easy";

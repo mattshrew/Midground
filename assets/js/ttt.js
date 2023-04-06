@@ -40,7 +40,7 @@ function playMove(square) {
     if (gameMode == "computer" && player == 1) {
         if (difficulty == "easy") computerMove1();
         else if (difficulty == "medium") computerMove2();
-        else if (difficulty == "impossible") computerMove3();
+        else if (difficulty == "hard") computerMove3();
     }
 }
 
@@ -306,7 +306,7 @@ function endGame(result) {
         document.getElementById("game__result").innerHTML = "‎Draw!";
     } else {
         document.getElementById("game__result").innerHTML = `${players[result - 1]} has won!`;
-        if (gameMode == "computer" && difficulty == "impossible" && result == 1) document.getElementById("game__result").innerHTML = "‎Please tell me how..";
+        if (gameMode == "computer" && difficulty == "hard" && result == 1) document.getElementById("game__result").innerHTML = "‎Please tell me how..";
     }
     document.getElementById("game__info").style.color = colours[result - 1];
     document.getElementById("game__info").innerHTML = "‎Game Over!";
@@ -348,8 +348,8 @@ function switchDifficulty(diff) {
         var newHTML = "DIFFICULTY: MEDIUM";
         difficulty = "medium";
     } else if (diff.innerHTML.slice(12) == "MEDIUM") {
-        var newHTML = "DIFFICULTY: IMPOSSIBLE";
-        difficulty = "impossible";
+        var newHTML = "DIFFICULTY: HARD";
+        difficulty = "hard";
     } else {
         var newHTML = "DIFFICULTY: EASY";
         difficulty = "easy";
