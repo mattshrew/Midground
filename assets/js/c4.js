@@ -127,7 +127,7 @@ async function computerMove1() {
         }
     }
 
-    await sleep(750);
+    await sleep(500);
     let choice = Math.floor(Math.random()*possible_moves.length);
     let move = possible_moves[choice];
     playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[1]}"]`));
@@ -144,7 +144,7 @@ async function computerMove2() {
         }
     }
 
-    await sleep(750);
+    await sleep(500);
 
     for (let i = 1; i >= 0; i--) {
         for (let j = 0; j < possible_moves.length; j++) {
@@ -186,6 +186,8 @@ async function computerMove3() {
             }
         }
     }
+
+    await sleep(500);
 
     function score(board) {
         const scoring = {0: 0, 1: 1, 2: 3, 3: 10, 4:99999};
