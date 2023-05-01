@@ -175,9 +175,8 @@ async function computerMove2() {
     playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[1]}"]`));
 }
 
-async function computerMove3() {
+function computerMove3() {
     let possible_moves = [];
-
     for (let col = 0; col < board[0].length; col++) {
         for (let row = 0; row < board.length; row++) {
             if (isEmpty([row, col])) {
@@ -186,12 +185,12 @@ async function computerMove3() {
             }
         }
     }
-
-    await sleep(500);
+    // console.log(possible_moves);
+    // await sleep(500);
 
     function score(board) {
-        const scoring = {0: 0, 1: 1, 2: 3, 3: 10, 4:99999};
-        let lines = [];
+        const scoring = {0: 0, 1: 1, 2: 3, 3: 10, 4:99999999};
+        // let lines = [];
         let scores = [0, 0];
 
 
@@ -253,16 +252,36 @@ async function computerMove3() {
     });
 
     for (let i = 1; i >= 0; i--) {
+        // console.log('\n\n', i);
         for (let j = 0; j < possible_moves.length; j++) {
-            board[possible_moves[j][0]][possible_moves[j][1]] = i;
-            let res = score(board);
-            if (j == 0 || j == board[0].length-1) res = [Math.round(res[0]/100), Math.round(res[1]/10)];
-            scores[possible_moves[j]] = scores[possible_moves[j]] + (res[i] - res[(i + 1) % 2]);
-            board[possible_moves[j][0]][possible_moves[j][1]] = -1;
-            // console.log(i, [possible_moves[j][0], possible_moves[j][1]], res, (res[i] - res[(i + 1) % 2]));
+            let cur_move = possible_moves[j].slice()
+            let max_score = -10e99;
+            board[cur_move[0]][cur_move[1]] = i;
+            // console.log('\n', i, cur_move);
+
+            for (let k = 0; k < possible_moves.length; k++) {
+                // res[i]: computer score, res[(i+1)%2]: player score
+                let next_move = possible_moves[k].slice()
+                if (j == k) {
+                    if (next_move[0] + 1 >= board.length) continue;
+                    next_move[0] += 1;
+                }
+                board[next_move[0]][next_move[1]] = (i + 1) % 2;
+                let res = score(board);
+                board[next_move[0]][next_move[1]] = -1;
+                if (next_move[1] == 0 || next_move[1] == board[0].length-1) res = [Math.round(res[0]/100) - 5, Math.round(res[1]/10) - 5];
+                let new_score = (res[(i + 1) % 2] - res[i]);
+                if (new_score > max_score) max_score = new_score;
+                
+                // console.log([next_move[0], next_move[1]], res, new_score);
+            }
+            board[cur_move[0]][cur_move[1]] = -1;
+            if (cur_move[1] == 0 || cur_move[1] == board[0].length-1 || cur_move[0] == board.length-1) max_score *= 10;
+            scores[cur_move] = scores[cur_move] - (max_score);
+            // console.log(i, cur_move, -max_score);
         }
     }
-
+    
     // console.log(JSON.stringify(scores).replace(/,"/g, ', "').replace(/":/g, '): ').replace(/"/g, '('));
     let moves = [];
     let max = Math.max.apply(Math, Object.values(scores));
@@ -270,7 +289,7 @@ async function computerMove3() {
     for (const key in scores) {
         if (scores[key] == max) moves.push(key);
     }
-
+    // console.log(scores);
     let move = moves[Math.floor(Math.random()*moves.length)];
     playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[2]}"]`));
 }
