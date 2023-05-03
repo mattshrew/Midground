@@ -111,7 +111,7 @@ async function computerMove3() {
             return;
         case 6:
             if (board[4] == players[0]) {
-                if ((board[0] != " && board[8] != ") || (board[2] != " && board[6] != ")) {
+                if ((board[0] != '' && board[8] != '') || (board[2] != '' && board[6] != '')) {
                     playMove(document.getElementById(squareIDs[empty_corners[Math.floor(Math.random()*empty_corners.length)]]));
                     return;
                 } else if (board[1] == players[0]) {
