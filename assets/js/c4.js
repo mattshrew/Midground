@@ -317,7 +317,7 @@ async function computerMove3() {
         get: (target, name) => name in target ? target[name] : 0
     });
 
-    var depth = 5;
+    var depth = 3;
 
     function minimax(turn, _depth=1) {
         let res_score;
