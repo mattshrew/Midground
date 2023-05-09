@@ -175,7 +175,7 @@ async function computerMove2() {
     playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[1]}"]`));
 }
 
-function computerMove3() {
+async function computerMove3() {
     let possible_moves = [];
     for (let col = 0; col < board[0].length; col++) {
         for (let row = 0; row < board.length; row++) {
@@ -186,7 +186,7 @@ function computerMove3() {
         }
     }
     // console.log(possible_moves);
-    // await sleep(500);
+    await sleep(350);
 
     function score(board) {
         const scoring = {0: 0, 1: 1, 2: 3, 3: 10, 4:99999999};
@@ -247,17 +247,176 @@ function computerMove3() {
         return max;
     }
 
+    /*
     let scores = new Proxy({}, {
         get: (target, name) => name in target ? target[name] : 0
     });
 
+    const depth = 2;
+
+    function minimax(turn, _depth=1) {
+        let max_score = -10e99;
+        for (let i = 0; i < possible_moves.length; i++) {
+            let next_move = possible_moves[i].slice();
+            while (board[next_move[0]][next_move[1]] != -1) {
+                if (next_move[0] + 1 >= board.length) break;
+                else next_move[0] += 1;
+            }
+            if (board[next_move[0]][next_move[1]] != -1) continue;
+
+            board[next_move[0]][next_move[1]] = turn;
+
+            let res, new_score;
+            if (_depth + 1 == depth) {
+                res = score(board);
+                if (next_move[1] == 0 || next_move[1] == board[0].length-1) res = [Math.round(res[0]/100) - 5, Math.round(res[1]/10) - 5];
+                new_score = (res[turn] - res[(turn + 1) % 2]);
+                // console.log(`${next_move}: ${new_score} (${res})`);
+            } else {
+                new_score = minimax((turn + 1) % 2, _depth + 1);
+            }
+            // console.log(`${next_move}: ${new_score} (${_depth})`);
+            board[next_move[0]][next_move[1]] = -1;
+            if (new_score > max_score) max_score = new_score;
+        }
+        return max_score;
+    }
+
+    for (let i = 0; i < possible_moves.length; i++) {
+        let cur_move = possible_moves[i].slice();
+        let move_score = 0;
+        board[cur_move[0]][cur_move[1]] = 1; 
+        // console.log('\n\n', cur_move, '(1)');
+        let s0 = minimax(0);
+        board[cur_move[0]][cur_move[1]] = 0; 
+        // console.log('\n', cur_move, '(0)');
+        let s1 = minimax(1);
+        board[cur_move[0]][cur_move[1]] = -1; 
+        move_score += s0;
+        move_score += s1;
+        // console.log(`\n${s0} + ${s1} = ${move_score}`);
+        if (cur_move[1] == 0 || cur_move[1] == board[0].length-1 || cur_move[0] == board.length-1) move_score *= 10;
+        scores[cur_move] = move_score;
+    }
+
+    
+
+    let moves = [];
+    let min = Math.min.apply(Math, Object.values(scores));
+
+    for (const key in scores) {
+        if (scores[key] == min) moves.push(key);
+    }
+    console.log(JSON.stringify(scores).replace(/,"/g, ', "').replace(/":/g, '): ').replace(/"/g, '('));
+    
+    console.log('\n\n\n');
+    */
+
+    
+    let scores = new Proxy({}, {
+        get: (target, name) => name in target ? target[name] : 0
+    });
+
+    var depth = 5;
+
+    function minimax(turn, _depth=1) {
+        let res_score;
+        if ((depth - _depth) % 2 == 1) res_score = -10e999;
+        else res_score = 10e999;
+
+        for (let i = 0; i < possible_moves.length; i++) {
+            let next_move = possible_moves[i].slice();
+            while (board[next_move[0]][next_move[1]] != -1) {
+                if (next_move[0] + 1 >= board.length) break;
+                else next_move[0] += 1;
+            }
+            if (board[next_move[0]][next_move[1]] != -1) continue;
+
+            board[next_move[0]][next_move[1]] = turn;
+
+            let res, new_score;
+            if (_depth + 1 == depth) {
+                res = score(board);
+                if (next_move[1] == 0 || next_move[1] == board[0].length-1) res[turn] = Math.round(res[turn]/10) - 5;
+                new_score = (res[turn] - res[(turn + 1) % 2]);
+            } else {
+                // console.log('\n');
+                new_score = minimax((turn + 1) % 2, _depth + 1);
+            }
+            // console.log(`${next_move}: ${new_score} (${_depth}) - ${res}`);
+            board[next_move[0]][next_move[1]] = -1;
+            if ((depth - _depth) % 2 == 1) {
+                if (new_score > res_score) res_score = new_score;
+            } else {
+                if (new_score < res_score) res_score = new_score;
+            }
+            
+        }
+        return res_score;
+    }
+
+    for (let i = 0; i < possible_moves.length; i++) {
+        let cur_move = possible_moves[i].slice();
+        let move_score = 0;
+        board[cur_move[0]][cur_move[1]] = 1; 
+        // console.log('\n\n', cur_move, '(1)');
+        let s0 = minimax(0);
+        board[cur_move[0]][cur_move[1]] = 0; 
+        // console.log('\n', cur_move, '(0)');
+        let s1 = minimax(1);
+        board[cur_move[0]][cur_move[1]] = -1; 
+        move_score += s0;
+        move_score += s1;
+        // console.log(`\n${s0} + ${s1} = ${move_score}`);
+        if (cur_move[1] == 0 || cur_move[1] == board[0].length-1 || cur_move[0] == board.length-1) move_score = Math.round(move_score/10);
+        scores[cur_move] = move_score;
+    }
+
+    
+
+    let moves = [];
+    let optimal_score = Math.max.apply(Math, Object.values(scores));
+
+    for (const key in scores) {
+        if (scores[key] == optimal_score) moves.push(key);
+    }
+    console.log(JSON.stringify(scores).replace(/,"/g, ', "').replace(/":/g, '): ').replace(/"/g, '('));
+    
+    
+    // console.log('\n\n\n');
+    
+    // scores = new Proxy({}, {
+    //     get: (target, name) => name in target ? target[name] : 0
+    // });
+
+    // var depth = 2;
+
+    // for (let i = 0; i < possible_moves.length; i++) {
+    //     let cur_move = possible_moves[i].slice();
+    //     let move_score = 0;
+    //     board[cur_move[0]][cur_move[1]] = 1; 
+    //     console.log('\n\n', cur_move, '(1)');
+    //     let s0 = minimax(0);
+    //     board[cur_move[0]][cur_move[1]] = 0; 
+    //     console.log('\n', cur_move, '(0)');
+    //     let s1 = minimax(1);
+    //     board[cur_move[0]][cur_move[1]] = -1; 
+    //     move_score += s0;
+    //     move_score += s1;
+    //     console.log(`\n${s0} + ${s1} = ${move_score}`);
+    //     if (cur_move[1] == 0 || cur_move[1] == board[0].length-1 || cur_move[0] == board.length-1) move_score = Math.round(move_score/10);
+    //     scores[cur_move] = move_score;
+    // }
+
+
+    /*
     for (let i = 1; i >= 0; i--) {
-        // console.log('\n\n', i);
+        console.log('\n\n', i);
         for (let j = 0; j < possible_moves.length; j++) {
             let cur_move = possible_moves[j].slice()
             let max_score = -10e99;
             board[cur_move[0]][cur_move[1]] = i;
-            // console.log('\n', i, cur_move);
+            console.log(`\n\n${cur_move} (${i})`);
 
             for (let k = 0; k < possible_moves.length; k++) {
                 // res[i]: computer score, res[(i+1)%2]: player score
@@ -273,23 +432,82 @@ function computerMove3() {
                 let new_score = (res[(i + 1) % 2] - res[i]);
                 if (new_score > max_score) max_score = new_score;
                 
-                // console.log([next_move[0], next_move[1]], res, new_score);
+                console.log(`${next_move}: ${new_score} (${res})`);
             }
             board[cur_move[0]][cur_move[1]] = -1;
             if (cur_move[1] == 0 || cur_move[1] == board[0].length-1 || cur_move[0] == board.length-1) max_score *= 10;
-            scores[cur_move] = scores[cur_move] - (max_score);
-            // console.log(i, cur_move, -max_score);
+            scores[cur_move] = scores[cur_move] + (max_score);
+            console.log(i, cur_move, max_score);
         }
     }
-    
-    // console.log(JSON.stringify(scores).replace(/,"/g, ', "').replace(/":/g, '): ').replace(/"/g, '('));
-    let moves = [];
-    let max = Math.max.apply(Math, Object.values(scores));
+    */
 
-    for (const key in scores) {
-        if (scores[key] == max) moves.push(key);
-    }
-    // console.log(scores);
+    // for (let i = 1; i >= 0; i--) {
+    //     // console.log('\n\n', i);
+    //     for (let j = 0; j < possible_moves.length; j++) {
+    //         let cur_move = possible_moves[j].slice();
+    //         let min_score = 10e99;
+    //         board[cur_move[0]][cur_move[1]] = i;
+    //         // console.log(`\n\n${cur_move} (${i})`);
+
+    //         for (let k = 0; k < possible_moves.length; k++) {
+    //             let next_move = possible_moves[k].slice();
+    //             let new_score = -10e99;
+                
+    //             while (board[next_move[0]][next_move[1]] != -1) {
+    //                 if (next_move[0] + 1 >= board.length) break;
+    //                 next_move[0] += 1;
+    //             }
+    //             if (board[next_move[0]][next_move[1]] != -1) continue;
+
+    //             board[next_move[0]][next_move[1]] = (i + 1) % 2;
+    //             // console.log('\n', next_move);
+
+    //             for (let l = 0; l < possible_moves.length; l++) {
+    //                 let next_next_move = possible_moves[l].slice();
+    //                 while (board[next_next_move[0]][next_next_move[1]] != -1) {
+    //                     if (next_next_move[0] + 1 >= board.length) break;
+    //                     next_next_move[0] += 1;
+    //                 }
+    //                 if (board[next_next_move[0]][next_next_move[1]] != -1) continue;
+
+    //                 board[next_next_move[0]][next_next_move[1]] = i;
+    //                 // res[i]: computer score, res[(i+1)%2]: player score
+                
+    //                 let res = score(board);
+    //                 board[next_next_move[0]][next_next_move[1]] = -1;
+    //                 if (next_next_move[1] == 0 || next_next_move[1] == board[0].length-1) res[i] = Math.round(res[i]/10) - 5;
+    //                 let next_new_score = (res[i] - res[(i + 1) % 2]);
+    //                 if (next_new_score > new_score) new_score = next_new_score;
+    //                 console.log(`${next_next_move}: ${next_new_score} (${res})`);
+    //             }
+
+    //             board[next_move[0]][next_move[1]] = -1;
+    //             // console.log('', next_move, new_score);
+
+    //             if (new_score < min_score) min_score = new_score;
+    //             console.log(`${next_move}: ${new_score}\n`);
+    //         }
+    //         board[cur_move[0]][cur_move[1]] = -1;
+    //         if (cur_move[1] == 0 || cur_move[1] == board[0].length-1 || cur_move[0] == board.length-1) min_score = Math.round(min_score/10);
+    //         scores[cur_move] = scores[cur_move] + (min_score);
+            
+    //         // console.log(`\n${cur_move} (${min_score})`);
+    //         // console.log(i, cur_move, -max_score);
+    //     }
+    // }
+    
+    // console.log('\n\n');
+
+    // moves = [];
+    // max = Math.max.apply(Math, Object.values(scores));
+
+    // for (const key in scores) {
+    //     if (scores[key] == max) moves.push(key);
+    // }
+    // console.log(JSON.stringify(scores).replace(/,"/g, ', "').replace(/":/g, '): ').replace(/"/g, '('));
+    
+
     let move = moves[Math.floor(Math.random()*moves.length)];
     playMove(document.querySelector(`[data-row="${move[0]}"][data-col="${move[2]}"]`));
 }
