@@ -81,6 +81,10 @@ body {
     width: 8rem;
 }
 
+.navbar__links--very_long {
+    width: 13rem;
+}
+
 .navbar__links--current {
     color: #f77062;
 }

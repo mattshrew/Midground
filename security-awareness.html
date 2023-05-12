@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Midground</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/index.css" >
+    <link rel="stylesheet" href="assets/css/security-awareness.css" >
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo"><i class="fas fa-moon"></i>MIDGROUND</a>
+            <div class="navbar__toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="/security-awareness.html" class="navbar__links navbar__links--very_long navbar__links--current">Security Awareness</a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="/" class="button">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+
+    <div class="main">
+        <div class="main__container">
+            <div class="main__content">
+                <h1>SECURITY AWARENESS</h1>
+                <h2>&gt; QUESTIONNAIRE</h2>
+                <p>&lt;Are you digitally secure?&gt;</p>
+                <button class="main__btn" id="play_quiz"><a href="/security-awareness.html#quiz">TAKE THE QUIZ</a></button>
+                &nbsp;&nbsp;
+                <button class="main__btn"><a href="/security-awareness.html#info">LEARN MORE</a></button>
+            </div>
+            <div class="main__img--container">
+                <img src="assets/images/secure_files.svg" alt="pic" class="main__img">
+            </div>
+        </div>
+    </div>
+  
+
+    <!-- Quiz -->
+
+    <div id="quiz">
+        <div id="quiz__container" class="fade">
+            <div id="quiz__info">
+                <div id="quiz__title"><h3>SECURITY AWARENESS QUIZ</h3><hr></div>
+                <div id="quiz__question"></div>
+                <!-- <div id="quiz__title"><h3>SECURITY AWARENESS QUIZ</h3><hr></div>
+                <div id="quiz__question">1.&nbsp;&nbsp;Do you use the same password for many different accounts?</div> -->
+            </div>
+            <ul id="quiz__answers">
+                <!-- <li>Always</li>
+                <li>Often</li>
+                <li>Sometimes</li>
+                <li>Rarely</li>
+                <li>Never</li> -->
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Information -->
+
+    <div id="info">
+        <div id="info__container">
+
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="footer__container">
+        <div class="social__media">
+            <div class="social__media--wrap">
+                <div class="footer__logo">
+                    <a href="/" id="footer__logo"><i class="fas fa-moon"></i>MIDGROUND</a>
+                </div>
+                <p class="website__info">Designed by Matthew Yang &NonBreakingSpace; • &NonBreakingSpace; Template
+                    by&NonBreakingSpace;<a class="website__attribution" href="https://www.youtube.com/@briandesign">Brian
+                    Design</a></p>
+                <div class="social__icons">
+                    <a class="social__icon--link" href="https://discord.com/users/672173302373941256" target="_blank" aria-label="Discord">
+                        <i class="fab fa-discord discord"></i>
+                        <span class="tooltip">Minuit#0554</span>
+                    </a>
+                    <a class="social__icon--link" href="https://www.instagram.com/mattshrewy" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram insta"></i>
+                        <span class="tooltip">@mattshrewy</span>
+                    </a>
+                    <a class="social__icon--link" href="https://github.com/mattshrew" target="_blank" aria-label="Github">
+                        <i class="fab fa-github github"></i>
+                        <span class="tooltip">mattshrew</span>
+                    </a>
+                    <a class="social__icon--link" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter twitter"></i>
+                        <span class="tooltip">???</span>
+                    </a>
+                    <a class="social__icon--link" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin linkedin"></i>
+                        <span class="tooltip">???</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/security-awareness.js"></script>
+    <script>buildInfoBlocks();</script>
+</body>
+
+</html>
