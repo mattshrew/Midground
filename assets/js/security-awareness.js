@@ -349,8 +349,7 @@ var quiz_active = false;
 var score;
 var responses;
 
-function sleep(ms) {  
-    return ;
+function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));  
 } 
 
