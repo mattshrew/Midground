@@ -256,11 +256,11 @@ const quiz_questions = [
     {
         question: "Take this phishing test. How well did you score?",
         answers: [
-            {answer: "8-10", score: 5},
-            {answer: "6-7", score: 4},
-            {answer: "4-5", score: 3},
-            {answer: "2-3", score: 2},
-            {answer: "0-1", score: 1}
+            {answer: "7-8", score: 5},
+            {answer: "5-6", score: 4},
+            {answer: "3-4", score: 3},
+            {answer: "1-2", score: 2},
+            {answer: "0", score: 1}
         ]
     },
     {
