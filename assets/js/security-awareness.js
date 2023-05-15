@@ -184,7 +184,7 @@ const quiz_questions = [
         ]
     },
     {
-        question: "When possible, how often do you use MFA (multiple authentication factors)?",
+        question: "When possible, how often do you use MFA (multi-factor authentication)?",
         answers: [
             {answer: "Always", score: 5},
             {answer: "Often", score: 4},
@@ -328,7 +328,7 @@ const quiz_questions = [
 const suggestions = [
     "To prevent attackers from guessing and brute-forcing, make sure to choose a strong password. Make longer passwords with lowercase, uppercase, and special characters.",
     "Always fully read a company/website's privacy policy before agreeing to their terms and conditions.",
-    "Consider using MFA (multiple authentication factors) whenever possible.",
+    "Consider using MFA (multi-factor authentication) whenever possible.",
     "To prevent stuffing, do not repeatedly use the same passwords for different accounts. Attackers will often try your credentials for one account on another.",
     "Be careful when sharing accounts. Only share your account credentials with people you trust, and be very careful of giving out adminstrator permissions.",
     "Be careful when sharing devices. Only share your device with people you trust, and be very careful of giving out administrator permissions.",
