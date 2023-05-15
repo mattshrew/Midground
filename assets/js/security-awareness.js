@@ -453,7 +453,7 @@ function endQuiz() {
 
     let improvements = [];
 
-    if (score != 80) {
+    if (Math.round(score*100/80) != 100) {
         for (let i = 0; i < quiz_questions.length; i++) {
             if (quiz_questions[i].answers[responses[i]].score != 5) improvements.push(suggestions[i]);
         }
