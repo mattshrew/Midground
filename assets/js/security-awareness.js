@@ -20,8 +20,9 @@ const security_awareness_info = [
     {
         name: "Encryption",
         info: ["Encryption is scrambling data to make it unreadable from everyone but the receiver (who has the “secret key”). This enables computers to share confidential information over open networks. There are 2 types of encryption: symmetric and asymmetric encryption.",
-        "In symmetric encryption, the same key is used to encrypt and decrypt the message. The Caesar Cipher is a famous example of symmetric encryption. In asymmetric encryption (also known as public key encryption), a pair of mathematically related keys are used to encrypt and decrypt the message. First the receiver generates a private key (never shared) and a corresponding public key, by multiplying 2 extremely large prime numbers. Then, the receiver sends the public key to the sender. The sender encrypts the message using the public key and a nearly irreversible mathematical operation. The sender now safely sends the encrypted message to the receiver, who decrypts it with their private key. This is much more secure, as the private key (used to decrypt the message) is never shared and cannot be intercepted.",
-        "However, this type of encryption is much slower, due to the complexity of the keys and the mathematical operation. Some messaging apps avoid this problem by using the TLS protocol. Here’s the process: First, the client performs a TCP handshake with the server. It sends a request to the server (containing the TLS protocol version and the desired encryption techniques). The server responds with a digital certificate containing the public key. After verifying the certificate, the client encrypts a pre-master key with the server’s public key. The server uses its private key to decrypt the pre-master key, which is then used to compute the shared key. The client and server can now use symmetrical encryption, without fear of attackers uncovering the shared key. This is much faster than public key encryption, and is often used in secure email sending and uploading files."],    
+        "In symmetric encryption, the same key is used to encrypt and decrypt the message. The Caesar Cipher is a famous example of symmetric encryption. In asymmetric encryption (also known as public key encryption), a pair of mathematically related keys are used to encrypt and decrypt the message. First, the receiver generates a private key (never shared) and a corresponding public key, by multiplying 2 extremely large prime numbers. Then, the receiver sends the public key to the sender. The sender encrypts the message using the public key and a nearly irreversible mathematical operation. The sender now safely sends the encrypted message to the receiver, who decrypts it with their private key. This is much more secure, as the private key (used to decrypt the message) is never shared and cannot be intercepted.",
+        "However, this type of encryption is much slower, due to the complexity of the keys and the mathematical operation. Some messaging apps avoid this problem by using the TLS protocol. Here’s the process: First, the client performs a TCP handshake with the server. It sends a request to the server (containing the TLS protocol version and the desired encryption techniques). The server responds with a digital certificate (issued by a certificate authority—a trusted organization that issues digital certificates to websites) containing the public key. After verifying the certificate, the client encrypts a pre-master key with the server’s public key. The server uses its private key to decrypt the pre-master key, which is then used to compute the shared key. The client and server can now use symmetrical encryption, without fear of attackers uncovering the shared key. This is much faster than public key encryption, and is often used in secure email sending and uploading files.",
+        "HTTPS is a secure way of sending data between a web server and browser. It is a secure version of the Hypertext Transfer Protocol (HTTP) and is used on most websites. This protocol uses public key encryption and the TLS handshake. NEVER submit personal information on unsecured websites."],    
     },
     {
         name: "Sharing Accounts/Devices",
@@ -53,6 +54,7 @@ const security_awareness_info = [
     }
 ];
 
+
 function buildInfoBlocks() {
     let section = document.getElementById("info__container");
     for (const obj of security_awareness_info) {
@@ -81,6 +83,8 @@ function buildInfoBlocks() {
     }
 }
 
+
+
 function expandInfoBlocks() {
     let buttons = document.querySelectorAll(".info__collapsible--button");
     Array.from(buttons, function(button) {
@@ -98,6 +102,63 @@ function collapseInfoBlocks() {
         let content = button.nextElementSibling;
         content.style.maxHeight = null;
         content.style.padding = "0 1rem";
+    });
+}
+
+
+const my_results = {
+    name: "MY RESULTS",
+    results: ["I am often wary of accepting cookies/terms of service on unfamiliar websites. I only accept necessary cookies and usually skim privacy policies before continuing.",
+    "I use Google’s password manager to generate and store my passwords. Because of this, my passwords are all very strong and are rarely repeated across different accounts. I do not use a VPN.",
+    "I try to use MFA (multi-factor authentication) as much as possible. On platforms that have an option for 2FA, I have this feature enabled. Attackers must have both my password and my phone to access my account on these websites. I do not regularly scan my computer for malware.",
+    "I am very wary of using unsecured websites, and always try to avoid them.",
+    "I share Netflix and Disney+ accounts with my cousins. However, I am not sure that they know how to be digitally secure. I do not possess any shared devices.",
+    "I am very cautious of downloading content from the internet. If I cannot trust the source, I will not risk downloading malware. All of my devices are password-protected.",
+    "My inbox receives a lot of phishing emails, which are all immediately deleted. Most are very easy to discern—with their poorly disguised email addresses, misspelled words, and clickbait-y hyperlinks.",
+    "I always hover over hyperlinks before clicking them, and have never experienced a virus or ransomware attack. However, I have never backed up my important files.",
+    "All of my social media accounts are private. Strangers cannot see my posts."],
+    suggestions: ["Always fully read a company/website's privacy policy before agreeing to their terms and conditions.",
+    "Consider using a VPN. VPNs protect your identity from companies, the government, and attackers.",
+    "Important files should be backed up every week, preferably every day. Try to follow the 3-2-1 rule for backing up files.",
+    "It is recommended that you scan your computer for malware once a week."]
+}
+
+function buildMyResults() {
+    let section = document.getElementById("results__container");
+    let collapsible = document.createElement("div"); collapsible.classList.add("info__collapsible");
+        let button = document.createElement("button"); button.classList.add("info__collapsible--button"); button.id = "results__title"; button.innerHTML = my_results.name;
+        let content_container = document.createElement("div"); content_container.classList.add("info__content"); content_container.id = "results__content";
+            let content_results_title = document.createElement("h2"); content_results_title.innerHTML = "My score: 84%";
+                content_container.appendChild(content_results_title);
+            let content_results = document.createElement("ul");
+                for (const result of my_results.results) {
+                    let content_result = document.createElement("li"); content_result.innerHTML = result;
+                    content_results.appendChild(content_result);
+                }
+                content_container.appendChild(content_results);
+            content_container.appendChild(document.createElement("br"));
+            let content_suggestions_title = document.createElement("h2"); content_suggestions_title.innerHTML = "Suggestions for improvement";
+            content_container.appendChild(content_suggestions_title);
+            let content_suggestions = document.createElement("ul");
+                for (const suggestion of my_results.suggestions) {
+                    let content_suggestion = document.createElement("li"); content_suggestion.innerHTML = suggestion;
+                    content_suggestions.appendChild(content_suggestion);
+                }
+                content_container.appendChild(content_suggestions);
+        collapsible.appendChild(button);
+        collapsible.appendChild(content_container);
+
+    section.appendChild(collapsible);
+    button.addEventListener("click", function() {
+        this.classList.toggle("info--active");
+        let content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+            content.style.padding = "0 1rem";
+        } else {
+            content.style.maxHeight = content.scrollHeight*2 + "px";
+            content.style.padding = "1rem";
+        }
     });
 }
 

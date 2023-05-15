@@ -441,3 +441,43 @@ body {
 .info--active:after {
     content: "\2BC5";
 }
+
+#results {
+    background-color: #141414;
+    margin: 2rem 0;
+}
+
+#results__container {
+    display: flex;
+    flex-direction: column;
+    background-color: #222222;
+    width: 60%;
+    margin: 0 auto;
+}
+
+#results__title {
+    color: #fff;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#results__container h2 {
+    padding: 1vh;
+    color: #fff;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+#results__container ul {
+    padding: 0 3rem 0 4rem;
+}
+
+#results__container li {
+    color: #fff;
+    padding: 1vh 0;
+}
+
+#results__content {
+    transition: max-height 0.5s, padding 0.5s;
+}
