@@ -1,5 +1,5 @@
 var gameActive = true;
-var gameMode = "player";
+var gamemode = "player";
 var difficulty = "easy";
 const colours = ["#60A0FF", "#A060FF", "#fff", "#333333", "#60A0FF90", "#A060FF90"];
 const players = ["P1", "P2"];
@@ -16,10 +16,25 @@ var board = [
 
 if (typeof window !== 'undefined') {
     window.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("connect-4__title").addEventListener("click", function() { switchMode(this); });
         document.getElementById("connect-4__difficulty").addEventListener("click", function() { switchDifficulty(this); });
         document.getElementById("game__info").style.color = colours[0];
         document.getElementById("game__info").innerHTML = `${players[0]} to move`;
+
+        let title = document.getElementById("connect-4__title"); title.addEventListener("click", function() { switchMode(this); });
+        let title_letters = title.children;
+        for (let title_letter of title_letters) {
+            title_letter.addEventListener("mouseover", function() {
+                for (let letter of title_letters) {
+                    letter.classList.add("span--active");
+                }
+            });
+
+            title_letter.addEventListener("mouseout", function() {
+                for (let letter of title_letters) {
+                    letter.classList.remove("span--active");
+                }
+            });
+        }
     
         let cells = document.querySelectorAll(".board__cell");
         let columns = [];
@@ -29,8 +44,8 @@ if (typeof window !== 'undefined') {
     
         Array.from(cells, function(cell) {
             cell.addEventListener("click", function() {
-                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
-                    if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gamemode == "computer")) {
+                    if (gameActive == true && !(player == 1 && gamemode == "computer")) {
                         let column = columns[cell.getAttribute("data-col")];
                         column.every(function(newCell) {
                             if (newCell == cell || isEmpty(newCell)) playMove(newCell);
@@ -43,8 +58,8 @@ if (typeof window !== 'undefined') {
     
         Array.from(cells, function(cell) {
             cell.addEventListener("mouseover", function() {
-                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
-                    if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gamemode == "computer")) {
+                    if (gameActive == true && !(player == 1 && gamemode == "computer")) {
                         let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
                         column.every(function(newCell) {
                             if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = colours[player+4];
@@ -57,8 +72,8 @@ if (typeof window !== 'undefined') {
     
         Array.from(cells, function(cell) {
             cell.addEventListener("mouseout", function() {
-                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gameMode == "computer")) {
-                    if (gameActive == true && !(player == 1 && gameMode == "computer")) {
+                if (!(this.classList.contains("p1") || this.classList.contains("p2")) && gameActive == true && !(player == 1 && gamemode == "computer")) {
+                    if (gameActive == true && !(player == 1 && gamemode == "computer")) {
                         let column = Array.from(document.querySelectorAll(`[data-col="${cell.getAttribute("data-col")}"]`)).reverse();
                         column.every(function(newCell) {
                             if (newCell == cell || isEmpty(newCell)) newCell.style.backgroundColor = "#333333";
@@ -105,7 +120,7 @@ function playMove(cell) {
         return;
     }
 
-    if (gameMode == "computer" && player == 1) {
+    if (gamemode == "computer" && player == 1) {
         if (difficulty == "easy") computerMove1();
         else if (difficulty == "medium") computerMove2();
         else if (difficulty == "hard") computerMove3();
@@ -593,26 +608,31 @@ function resetGame() {
 }
 
 function switchMode(title) {
-    if (title.innerHTML.slice(10) == "PLAYER") {
-        var newHTML = "PLAYER VS COMPUTER";
-        gameMode = "computer";
+    if (gamemode == "player") {
+        var newHTML = "PLAYER\xa0VS\xa0COMPUTER";
+        gamemode = "computer";
     } else {
-        var newHTML = "PLAYER VS PLAYER";
-        gameMode = "player";
+        var newHTML = "PLAYER\xa0VS\xa0PLAYER  ";
+        gamemode = "player";
     }
 
     resetGame();
-    title.innerHTML = newHTML;
+    let title_chars = title.children;
+    for (let i = 0; i < title_chars.length; i++) {
+        title_chars[i].innerHTML = newHTML[i];
+    }
+
+    // title.innerHTML = newHTML;
     title.setAttribute("data-content", newHTML);
-    if (gameMode == "computer") document.getElementById("connect-4__difficulty").style.display = "inline-block";
+    if (gamemode == "computer") document.getElementById("connect-4__difficulty").style.display = "inline-block";
     else document.getElementById("connect-4__difficulty").style.display = "none";
 }
 
 function switchDifficulty(diff) {
-    if (diff.innerHTML.slice(12) == "EASY") {
+    if (difficulty == "easy") {
         var newHTML = "DIFFICULTY: MEDIUM";
         difficulty = "medium";
-    } else if (diff.innerHTML.slice(12) == "MEDIUM") {
+    } else if (difficulty == "medium") {
         var newHTML = "DIFFICULTY: HARD";
         difficulty = "hard";
     } else {

@@ -6,7 +6,9 @@
 
 #connect-4__title {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     font-size: 2.5rem;
     font-weight: bold;
     background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
@@ -16,10 +18,114 @@
     -moz-text-fill-color: transparent;
     cursor: pointer;
     overflow: hidden;
+    padding-bottom: 1rem;
     margin: 3vh auto 5px;
 }
 
-#connect-4__title::before {
+#connect-4__title span {
+    background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    position: relative;
+    top: 1rem;
+    animation: bounce 10s ease infinite normal;
+}
+
+#connect-4__title .span--active {
+    background-image: linear-gradient(to top, #b721ff 0%, #20E0FF 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    transition: all 0.5s ease;
+}
+
+
+@keyframes bounce {
+    2% {
+        top: 0;
+    }
+    4% {
+        top: 1rem;
+    }
+}
+
+#connect-4__title span:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+#connect-4__title span:nth-child(2) {
+    animation-delay: 50ms;
+}
+
+#connect-4__title span:nth-child(3) {
+    animation-delay: 100ms;
+}
+
+#connect-4__title span:nth-child(4) {
+    animation-delay: 150ms;
+}
+
+#connect-4__title span:nth-child(5) {
+    animation-delay: 200ms;
+}
+
+#connect-4__title span:nth-child(6) {
+    animation-delay: 250ms;
+}
+
+#connect-4__title span:nth-child(7) {
+    animation-delay: 300ms;
+}
+
+#connect-4__title span:nth-child(8) {
+    animation-delay: 350ms;
+}
+
+#connect-4__title span:nth-child(9) {
+    animation-delay: 400ms;
+}
+
+#connect-4__title span:nth-child(10) {
+    animation-delay: 450ms;
+}
+
+#connect-4__title span:nth-child(11) {
+    animation-delay: 500ms;
+}
+
+#connect-4__title span:nth-child(12) {
+    animation-delay: 550ms;
+}
+
+#connect-4__title span:nth-child(13) {
+    animation-delay: 600ms;
+}
+
+#connect-4__title span:nth-child(14) {
+    animation-delay: 650ms;
+}
+
+#connect-4__title span:nth-child(15) {
+    animation-delay: 700ms;
+}
+
+#connect-4__title span:nth-child(16) {
+    animation-delay: 750ms;
+}
+
+#connect-4__title span:nth-child(17) {
+    animation-delay: 800ms;
+}
+
+#connect-4__title span:nth-child(18) {
+    animation-delay: 850ms;
+}
+
+
+/* #connect-4__title::before {
     position: absolute;
     content: attr(data-content);
     top: 0;
@@ -33,11 +139,12 @@
     transition: width 0.5s;
     width: 0;
     white-space: nowrap;
-}
+} 
+
 
 #connect-4__title:hover::before {
     width: 100%;
-}
+} */
 
 
 #connect-4__difficulty {
@@ -56,7 +163,15 @@
     margin-bottom: 1rem;
 }
 
-#connect-4__difficulty::before {
+#connect-4__difficulty:hover {
+    background-image: linear-gradient(to top, #b721ff 0%, #20E0FF 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+/* #connect-4__difficulty::before {
     position: absolute;
     content: attr(data-content);
     top: 0;
@@ -74,7 +189,7 @@
 
 #connect-4__difficulty:hover::before {
     width: 100%;
-}
+} */
 
 #game__info, #game__result {
     color: #fff;

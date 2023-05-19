@@ -1,5 +1,5 @@
 var gameActive = true;
-var gameMode = "player";
+var gamemode = "player";
 var difficulty = "easy";
 const squareIDs = ["top-left", "top-middle", "top-right", "middle-left", "middle-middle", "middle-right", "bottom-left", "bottom-middle", "bottom-right"];
 const colours = ["#60A0FF", "#A060FF", "#fff"];
@@ -8,8 +8,23 @@ var player = 0;
 var board = ['', '', '', '', '', '', '', '', ''];
 
 window.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("tic-tac-toe__title").addEventListener("click", function() { switchMode(this); });
     document.getElementById("tic-tac-toe__difficulty").addEventListener("click", function() { switchDifficulty(this); });
+
+    let title = document.getElementById("tic-tac-toe__title"); title.addEventListener("click", function() { switchMode(this); });
+    let title_letters = title.children;
+    for (let title_letter of title_letters) {
+        title_letter.addEventListener("mouseover", function() {
+            for (let letter of title_letters) {
+                letter.classList.add("span--active");
+            }
+        });
+
+        title_letter.addEventListener("mouseout", function() {
+            for (let letter of title_letters) {
+                letter.classList.remove("span--active");
+            }
+        });
+    }
 
     document.getElementById("game__info").style.color = colours[0];
     document.getElementById("game__info").innerHTML = `${players[0]} to move`;
@@ -17,7 +32,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
     Array.from(squares, function(square) {
         square.addEventListener("click", function() {
-        if (this.innerHTML == '' && gameActive == true && !(player == 1 && gameMode == "computer")) {
+        if (this.innerHTML == '' && gameActive == true && !(player == 1 && gamemode == "computer")) {
             playMove(this);
         }});
     });
@@ -37,7 +52,7 @@ function playMove(square) {
         return;
     }
 
-    if (gameMode == "computer" && player == 1) {
+    if (gamemode == "computer" && player == 1) {
         if (difficulty == "easy") computerMove1();
         else if (difficulty == "medium") computerMove2();
         else if (difficulty == "hard") computerMove3();
@@ -306,7 +321,7 @@ function endGame(result) {
         document.getElementById("game__result").innerHTML = "‎Draw!";
     } else {
         document.getElementById("game__result").innerHTML = `${players[result - 1]} has won!`;
-        if (gameMode == "computer" && difficulty == "hard" && result == 1) document.getElementById("game__result").innerHTML = "‎Please tell me how..";
+        if (gamemode == "computer" && difficulty == "hard" && result == 1) document.getElementById("game__result").innerHTML = "‎Please tell me how..";
     }
     document.getElementById("game__info").style.color = colours[result - 1];
     document.getElementById("game__info").innerHTML = "‎Game Over!";
@@ -328,18 +343,23 @@ function resetGame() {
 
 
 function switchMode(title) {
-    if (title.innerHTML.slice(10) == "PLAYER") {
-        var newHTML = "PLAYER VS COMPUTER";
-        gameMode = "computer";
+    if (gamemode == "player") {
+        var newHTML = "PLAYER\xa0VS\xa0COMPUTER";
+        gamemode = "computer";
     } else {
-        var newHTML = "PLAYER VS PLAYER";
-        gameMode = "player";
+        var newHTML = "PLAYER\xa0VS\xa0PLAYER  ";
+        gamemode = "player";
     }
 
     resetGame();
-    title.innerHTML = newHTML;
+    let title_chars = title.children;
+    for (let i = 0; i < title_chars.length; i++) {
+        title_chars[i].innerHTML = newHTML[i];
+    }
+
+    // title.innerHTML = newHTML;
     title.setAttribute("data-content", newHTML);
-    if (gameMode == "computer") document.getElementById("tic-tac-toe__difficulty").style.display = "inline-block";
+    if (gamemode == "computer") document.getElementById("tic-tac-toe__difficulty").style.display = "inline-block";
     else document.getElementById("tic-tac-toe__difficulty").style.display = "none";
 }
 
