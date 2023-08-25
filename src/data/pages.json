@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Home",
+        "path": "/",
+        "children": []
+    },
+    {
+        "name": "Games",
+        "path": "#",
+        "children": [
+            {
+                "name": "TTT",
+                "path": "/ttt",
+                "children": []
+            },
+            {
+                "name": "C4",
+                "path": "/c4",
+                "children": []
+            }
+        ]
+    },
+    {
+        "name": "About Me",
+        "path": "/about-me",
+        "children": []
+    }
+]

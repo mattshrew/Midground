@@ -2,11 +2,11 @@ body {
     background-color: #141414;
 }
   
-.main {
+.about-me .main {
     background-color: #141414;
 }
   
-.main__container {
+.about-me .main__container {
     display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: center;
@@ -20,62 +20,64 @@ body {
     padding: 0 50px;
 }
 
-.main__content h1 {
+.about-me .main__content h1 {
     font-size: 4rem;
     background-color: #ff8177;
     background-image: linear-gradient(to top, #b72144 0%, #ffb199 100%);
     background-size: 100%;
+    background-clip: text;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
 }
 
-.main__content h2 {
+.about-me .main__content h2 {
     font-size: 4rem;
     background-color: #ff8177;
     background-image: linear-gradient(to top, #b721ff 0%, #20E0FF 100%);
     background-size: 100%;
+    background-clip: text;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
 }
 
-.main__content p {
+.about-me .main__content p {
     margin-top: 1rem;
     font-size: 2.25rem;
     font-weight: 700;
     color: #fff;
 }
 
-.main__img--container {
+.about-me .main__img--container {
     text-align: center;
 }
 
-.main__img {
+.about-me .main__img {
     height: 90%;
     width: 90%;
 }
 
 
 @media screen and (max-width: 1000px) {
-    .main__content h1 {
+    .about-me .main__content h1 {
         font-size: 3rem;
         margin-top: 2rem;
     }
 
-    .main__content h2 {
+    .about-me .main__content h2 {
         font-size: 3rem;
     }
 
-    .main__content p {
+    .about-me .main__content p {
         font-size: 1.75rem;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .main__container {
+    .about-me .main__container {
         display: grid;
         grid-template-columns: auto;
         align-items: center;
@@ -85,59 +87,59 @@ body {
         height: 75vh;
     }
 
-    .main__content {
+    .about-me .main__content {
         text-align: center;
         align-content: space-evenly;
     }
 
-    .main__content h1 {
+    .about-me .main__content h1 {
         font-size: 3rem;
         margin-top: 2rem;
     }
 
-    .main__content h2 {
+    .about-me .main__content h2 {
         font-size: 3rem;
     }
 
-    .main__content p {
+    .about-me .main__content p {
         margin-top: 1rem;
         font-size: 1.5rem;
     }
 
-    .main__img {
+    .about-me.main__img {
         width: 50%;
     }
 }
 
 @media screen and (max-width: 570px) {
-    .main__container {
+    .about-me .main__container {
         height: 65vh;
     }
 
-    .main__content h1 {
+    .about-me .main__content h1 {
         font-size: 2.5rem;
     }
 
-    .main__content h2 {
+    .about-me .main__content h2 {
         font-size: 2.5rem;
     }
 
-    .main__content p {
+    .about-me .main__content p {
         font-size: 1.25rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .main__content h1 {
+    .about-me .main__content h1 {
         font-size: 2rem;
         margin-top: 3rem;
     }
 
-    .main__content h2 {
+    .about-me .main__content h2 {
         font-size: 2rem;
     }
 
-    .main__content p {
+    .about-me .main__content p {
         margin-top: 2rem;
         font-size: 1rem;
     }
