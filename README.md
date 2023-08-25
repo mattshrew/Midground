@@ -1,2 +1,2 @@
 # The Midground
-My personal playground
+My Portfolio / Playground
