@@ -115,6 +115,35 @@
     transition: all 0.3s ease;
 }
 
+.navbar__account {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.navbar__account .navbar__picture {
+    width: 2.5rem;
+    border-radius: 50%;
+}
+
+.navbar__account p {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+    color: #fff;
+    /* text-decoration: underline; */
+}
+
+.navbar__account:hover p {
+    cursor: pointer;
+    color: #f77062;
+    /* text-decoration: underline; */
+}
+
+/* .navbar__account:hover p:last-child {
+    cursor: pointer;
+    text-decoration: underline;
+} */
+
 .navbar__links:hover {
     color: #f77062;
     transition: all 0.3s ease;

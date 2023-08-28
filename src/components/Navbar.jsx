@@ -2,13 +2,68 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import jwt_decode from 'jwt-decode';
+
 import '../styles.css';
 import '../styles/Navbar.css';
 
 import pages from '../data/pages.json';
 
+/* global google */
 function Navbar() {
+    const [user, setUser] = useState({});
     const [curPage, setCurPage] = useState("Home");
+
+    function handleCallbackResponse(response) {
+        const userObject = jwt_decode(response.credential);
+        setUser(userObject);
+        console.log(userObject);
+    }
+
+    async function createOAuthButton() {
+        try {
+            await google.accounts.id.initialize({
+                client_id: "490372009770-m79o5oh24301qsvnsbeftqkm70t5c0r6.apps.googleusercontent.com",
+                callback: handleCallbackResponse
+            });
+        } catch (e) {
+            console.log("Error:", e);
+        }
+    }
+
+    async function renderOAuthButton() {
+        try {
+            await google.accounts.id.renderButton(
+                document.querySelector(".g_id_signin"),
+                { theme: "filled_black", size: "large", text: "signin", logo_alignment: "right" }
+            );
+        } catch (e) {
+            console.log("Error:", e);
+        }
+    }
+
+    // async function logout() {
+    //     setUser({});
+    //     await createOAuthButton();
+    //     await renderOAuthButton();
+    // }
+
+    useEffect(() => {
+        createOAuthButton();
+        renderOAuthButton();
+        // eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        async function OAuthButton() {
+            if (Object.keys(user).length === 0) {
+                await createOAuthButton();
+                await renderOAuthButton();
+            }
+        }
+        OAuthButton();
+        // eslint-disable-next-line
+    }, [user, curPage]);
 
     useEffect(() => {
         document.title = `${curPage} - Midground`;
@@ -70,18 +125,27 @@ function Navbar() {
             )
         }
 
-        function NavBtn() {
+        function NavAccount() {
             return (
-                <li class="navbar__btn">
-                    <Link to="/" class="sign-in" onClick={() => {setCurPage("Home")}}>Sign In</Link>
-                </li>
+                <>
+                    {(Object.keys(user).length === 0) ? (
+                        <li class="navbar__btn">
+                            <div class="g_id_signin"></div>
+                        </li>
+                    ) : (
+                        <li class="navbar__account">
+                            <img class="navbar__picture" src={user.picture} alt="profile_pic" />
+                            <p onClick={() => {setUser({})}}>{user.name}<br />{"< Logout />"}</p>
+                        </li>
+                    )}
+                </>
             )
         }
 
         return (
             <ul class="navbar__menu">
                 { pages.map((page) => <NavItem {...page} />) }
-                <NavBtn />
+                <NavAccount />
             </ul>
         )
     }

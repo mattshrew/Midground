@@ -22,7 +22,7 @@ class App extends React.Component {
 
     render() {
         if (this.loading) {
-            return <>idk</>
+            return <div>Loading...</div>
         }
 
         return (
