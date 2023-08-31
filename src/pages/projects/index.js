@@ -6,14 +6,11 @@ import '../../styles/projects.css';
 
 import projects from '../../data/projects.json';
 
-import _midgroundImage from '../../images/projects/midground-image.svg';
-
 const Projects = () => {
     let imgs = require.context('../../images/projects', false, /\.(png|jpe?g|svg)$/);
     var images = {};
     imgs.keys().forEach((item, index) => { images[item.replace('./', '').slice(0, item.indexOf('-') - 2)] = []; })
     imgs.keys().forEach((item, index) => { images[item.replace('./', '').slice(0, item.indexOf('-') - 2)].push(imgs(item)); })
-
 
     function Gallery(props) {
         useEffect(() => {
