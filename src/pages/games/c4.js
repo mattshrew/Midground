@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import '../styles.css';
-import '../styles/games.css';
+import '../../styles.css';
+import '../../styles/games.css';
  
 const C4 = () => {
     const modes = ["PLAYER\xa0VS\xa0PLAYER  ", "PLAYER\xa0VS\xa0COMPUTER"];
@@ -306,7 +306,7 @@ const C4 = () => {
     }
 
     return (
-        <div class="connect-4">
+        <div className="connect-4">
             <div id="game__title" data-content={modes[mode]} onClick={switchMode}>
                 <span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>P</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>L</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>A</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>Y</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>E</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>R</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>&nbsp;</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>V</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>S</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>&nbsp;</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>P</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>L</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>A</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>Y</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>E</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>R</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}></span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}></span>
             </div>
@@ -315,14 +315,14 @@ const C4 = () => {
 
             <p id="game__info" style={{color: (gameState === 0) ? colours[player] : colours[gameState - 1]}}>{(gameState === 0) ? `${players[player]} to move` : "‎Game Over!"}</p>
             
-            <table class="board">
+            <table className="board">
                 <tbody>
                     {
                         [...Array(6).keys()].reverse().map((row) => {
                             return (
-                                <tr key={`board__row--${row}`} class="board__row">
+                                <tr key={`board__row--${row}`} className="board__row">
                                     {[...Array(7).keys()].map((col) => { 
-                                        return <td key={`board__col--${col}`} class={`board__cell${(board[row][col] !== -1) ? " is-active" : ""}`} data-row={row} data-col={col} style={{backgroundColor: colours[board[row][col]]}} onClick={(e) => playMove(e.target)} onMouseEnter={(e) => cellHover(e.target, true)} onMouseLeave={(e) => cellHover(e.target, false)}></td> 
+                                        return <td key={`board__col--${col}`} className={`board__cell${(board[row][col] !== -1) ? " is-active" : ""}`} data-row={row} data-col={col} style={{backgroundColor: colours[board[row][col]]}} onClick={(e) => playMove(e.target)} onMouseEnter={(e) => cellHover(e.target, true)} onMouseLeave={(e) => cellHover(e.target, false)}></td> 
                                     })}
                                 </tr>
                             )
@@ -332,7 +332,7 @@ const C4 = () => {
             </table>
 
             <p id="game__result" style={{color: colours[gameState - 1]}}>{results[gameState]}</p>
-            <button class="game__reset" onClick={resetGame}>RESET</button>
+            <button className="game__reset" onClick={resetGame}>RESET</button>
         </div>
     );
 };

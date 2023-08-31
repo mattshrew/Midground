@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import '../styles.css';
-import '../styles/games.css';
+import '../../styles.css';
+import '../../styles/games.css';
  
 const TTT = () => {
     const modes = ["PLAYER\xa0VS\xa0PLAYER  ", "PLAYER\xa0VS\xa0COMPUTER"];
@@ -279,7 +279,7 @@ const TTT = () => {
 
 
     return (
-        <div class="tic-tac-toe">
+        <div className="tic-tac-toe">
             <div id="game__title" data-content={modes[mode]} onClick={switchMode} >
                 <span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>P</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>L</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>A</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>Y</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>E</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>R</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>&nbsp;</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>V</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>S</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>&nbsp;</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>P</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>L</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>A</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>Y</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>E</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}>R</span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}></span><span onMouseEnter={() => titleHover(true)} onMouseLeave={() => titleHover(false)}></span>
             </div>
@@ -288,12 +288,12 @@ const TTT = () => {
 
             <p id="game__info" style={{color: (gameState === 0) ? colours[player] : colours[gameState - 1]}}>{(gameState === 0) ? `${players[player]} to move` : "‎Game Over!"}</p>
 
-            <div class="board">
-                { squareIDs.map((s, i) => { return <div key={s} class={`board__square${(board[i] !== '') ? " is-active" : ""}`} id={s} style={{color: colours[players.indexOf(board[i])]}} onClick={(e) => playMove(e.target)}>{board[i]}</div> }) }
+            <div className="board">
+                { squareIDs.map((s, i) => { return <div key={s} className={`board__square${(board[i] !== '') ? " is-active" : ""}`} id={s} style={{color: colours[players.indexOf(board[i])]}} onClick={(e) => playMove(e.target)}>{board[i]}</div> }) }
             </div>
 
             <p id="game__result" style={{color: colours[gameState - 1]}}>{(mode === 1 && gameState === 1 && difficulty === "HARD") ? "‎Please tell me how.." : results[gameState]}</p>
-            <button class="game__reset" onClick={resetGame}>RESET</button>
+            <button className="game__reset" onClick={resetGame}>RESET</button>
         </div>
     );
 };

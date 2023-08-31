@@ -1,0 +1,38 @@
+[
+    {
+        "id": "midground",
+        "name": "The Midground",
+        "description": "My personal portfolio/playground.",
+        "link": "/"
+    },
+    {
+        "id": "phishy",
+        "name": "Phishy",
+        "description": "ML-powered chrome extension that detects phishing emails.",
+        "link": "https://github.com/raydrost/Phishy"
+    },
+    {
+        "id": "emojion",
+        "name": "Emoɉion",
+        "description": "A speech-to-text chrome extension that visualizes emotion in speech data using AssemblyAI.",
+        "link": "https://github.com/mattshrew/Emojion"
+    },
+    {
+        "id": "",
+        "name": "[Rythmhacks?]",
+        "description": "",
+        "link": ""
+    },
+    {
+        "id": "",
+        "name": "[HackTheNorth?]",
+        "description": "",
+        "link": ""
+    },
+    {
+        "id": "",
+        "name": "[HackTheValley?]",
+        "description": "",
+        "link": ""
+        }
+]

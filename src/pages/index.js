@@ -11,38 +11,38 @@ import '../styles/index.css';
 const Home = () => {
     return (
         <div>
-            <div class="main">
-                <div class="main__container">
-                    <div class="main__content">
+            <div className="main">
+                <div className="main__container">
+                    <div className="main__content">
                         <h1>GAMES</h1>
                         <h2>&gt; TIC TAC TOE</h2>
                         <p>&lt;Play vs Player/Computer&gt;</p>
-                        <button class="main__btn"><Link to="/ttt">PLAY NOW</Link></button>
+                        <button className="main__btn"><Link to="/games/ttt">PLAY NOW</Link></button>
                     </div>
-                    <div class="main__img--container">
-                        <img src={_pic1} alt="pic" class="main__img" />
+                    <div className="main__img--container">
+                        <img src={_pic1} alt="pic" className="main__img" />
                     </div>
                 </div>
-                <div class="main__container">
-                    <div class="main__img--container">
-                        <img src={_pic2} alt="pic" class="main__img" />
+                <div className="main__container">
+                    <div className="main__img--container">
+                        <img src={_pic2} alt="pic" className="main__img" />
                     </div>
-                    <div class="main__content">
+                    <div className="main__content">
                         <h1>GAMES</h1>
                         <h2>&gt; CONNECT 4</h2>
                         <p>&lt;Play vs Player/Computer&gt;</p>
-                        <button class="main__btn"><Link to="/c4">PLAY NOW</Link></button>
+                        <button className="main__btn"><Link to="/games/c4">PLAY NOW</Link></button>
                     </div>
                 </div>
-                <div class="main__container">
-                    <div class="main__content">
+                <div className="main__container">
+                    <div className="main__content">
                         <h1>ABOUT ME</h1>
                         <h2>&gt; MATTHEW YANG</h2>
                         <p>&lt;Student/Programmer<br />/Guitarist/Chess Player&gt;</p>
-                        <button class="main__btn"><Link to="/about-me">LEARN MORE</Link></button>
+                        <button className="main__btn"><Link to="/about-me">LEARN MORE</Link></button>
                     </div>
-                    <div class="main__img--container">
-                        <img src={_profile} alt="pic" class="main__img" />
+                    <div className="main__img--container">
+                        <img src={_profile} alt="pic" className="main__img" />
                     </div>
                 </div>
             </div>

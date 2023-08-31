@@ -5,17 +5,22 @@
         "children": []
     },
     {
+        "name": "Projects",
+        "path": "/projects",
+        "children": []
+    },
+    {
         "name": "Games",
         "path": "#",
         "children": [
             {
                 "name": "TTT",
-                "path": "/ttt",
+                "path": "/games/ttt",
                 "children": []
             },
             {
                 "name": "C4",
-                "path": "/c4",
+                "path": "/games/c4",
                 "children": []
             }
         ]

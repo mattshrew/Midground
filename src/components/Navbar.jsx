@@ -10,7 +10,7 @@ import '../styles/Navbar.css';
 import pages from '../data/pages.json';
 
 /* global google */
-function Navbar() {
+const Navbar = () => {
     const [user, setUser] = useState({});
     const [curPage, setCurPage] = useState("Home");
 
@@ -71,8 +71,8 @@ function Navbar() {
 
     function Nav(props) {
         return (
-            <nav class="navbar">
-                <div class="navbar__container">
+            <nav className="navbar">
+                <div className="navbar__container">
                     {props.children}
                 </div>
             </nav>
@@ -80,7 +80,7 @@ function Navbar() {
     }
 
     function NavLogo() {
-        return <Link to="/" id="navbar__logo"><i class="fas fa-moon"></i>MIDGROUND</Link>
+        return <Link to="/" id="navbar__logo"><i className="fas fa-moon"></i>MIDGROUND</Link>
     }
 
     function NavToggle() {
@@ -92,10 +92,10 @@ function Navbar() {
         }
 
         return (
-            <div class="navbar__toggle" id="mobile-menu" onClick={menuToggle}>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
+            <div className="navbar__toggle" id="mobile-menu" onClick={menuToggle}>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
+                    <span className="bar"></span>
             </div>
         )
     }
@@ -105,11 +105,11 @@ function Navbar() {
             const [open, setOpen] = useState(false);
 
             return (
-                <li class="navbar__item">
+                <li className="navbar__item">
                     {(props.children.length) ? (
-                        <Link to={props.path} class={`navbar__links${(props.children.map(child => child.name).includes(curPage)) ? " navbar__links--current" : ""}`} onClick={() => setOpen(!open)}>{props.name}&nbsp;{(open) ? <i class="fas fa-caret-up"></i> : <i class="fas fa-caret-down"></i>}</Link>
+                        <Link to={props.path} className={`navbar__links${(props.children.map(child => child.name).includes(curPage)) ? " navbar__links--current" : ""}`} onClick={() => setOpen(!open)}>{props.name}&nbsp;{(open) ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}</Link>
                     ) : (
-                        <Link to={props.path} class={`navbar__links${(curPage === props.name) ? " navbar__links--current" : ""}`} onClick={() => setCurPage(props.name)}>{props.name}</Link>
+                        <Link to={props.path} className={`navbar__links${(curPage === props.name) ? " navbar__links--current" : ""}`} onClick={() => setCurPage(props.name)}>{props.name}</Link>
                     )}
                     
                     {open && <DropdownMenu {...props} />}
@@ -119,8 +119,8 @@ function Navbar() {
 
         function DropdownMenu(props) {
             return (
-                <div class="navbar__dropdown">
-                    { props.children.map((child) => <NavItem {...child} />) }
+                <div className="navbar__dropdown">
+                    { props.children.map((child) => <NavItem {...child} key={child.name} />) }
                 </div>
             )
         }
@@ -129,12 +129,12 @@ function Navbar() {
             return (
                 <>
                     {(Object.keys(user).length === 0) ? (
-                        <li class="navbar__btn">
-                            <div class="g_id_signin"></div>
+                        <li className="navbar__btn">
+                            <div className="g_id_signin"></div>
                         </li>
                     ) : (
-                        <li class="navbar__account">
-                            <img class="navbar__picture" src={user.picture} alt="profile_pic" />
+                        <li className="navbar__account">
+                            <img className="navbar__picture" src={user.picture} alt="profile_pic" />
                             <p onClick={() => {setUser({})}}>{user.name}<br />{"< Logout />"}</p>
                         </li>
                     )}
@@ -143,8 +143,8 @@ function Navbar() {
         }
 
         return (
-            <ul class="navbar__menu">
-                { pages.map((page) => <NavItem {...page} />) }
+            <ul className="navbar__menu">
+                { pages.map((page) => <NavItem {...page} key={page.name} />) }
                 <NavAccount />
             </ul>
         )
@@ -159,24 +159,24 @@ function Navbar() {
     )
     
     // return (
-    //     <nav class="navbar">
-    //         <div class="navbar__container">
-    //             <Link to="/" id="navbar__logo"><i class="fas fa-moon"></i>MIDGROUND</Link>
-    //             <div class="navbar__toggle" id="mobile-menu" onClick={menuToggle}>
-    //                 <span class="bar"></span>
-    //                 <span class="bar"></span>
-    //                 <span class="bar"></span>
+    //     <nav className="navbar">
+    //         <div className="navbar__container">
+    //             <Link to="/" id="navbar__logo"><i className="fas fa-moon"></i>MIDGROUND</Link>
+    //             <div className="navbar__toggle" id="mobile-menu" onClick={menuToggle}>
+    //                 <span className="bar"></span>
+    //                 <span className="bar"></span>
+    //                 <span className="bar"></span>
     //             </div>
-    //             <ul class="navbar__menu">
+    //             <ul className="navbar__menu">
     //                 { pages.map((page) => {
     //                     return (
-    //                         <li class="navbar__item">
-    //                             <Link to={page.path} key={page.name} class={`navbar__links${(curPage === page.name) ? " navbar__links--current" : ""}`} onClick={() => setCurPage(page.name)}>{page.name}</Link>
+    //                         <li className="navbar__item">
+    //                             <Link to={page.path} key={page.name} className={`navbar__links${(curPage === page.name) ? " navbar__links--current" : ""}`} onClick={() => setCurPage(page.name)}>{page.name}</Link>
     //                         </li>
     //                     );
     //                 }) }
-    //                 <li class="navbar__btn">
-    //                     <Link to="/" class="sign-in" onClick={() => {setCurPage("Home")}}>Sign In</Link>
+    //                 <li className="navbar__btn">
+    //                     <Link to="/" className="sign-in" onClick={() => {setCurPage("Home")}}>Sign In</Link>
     //                 </li>
     //             </ul>
     //         </div>

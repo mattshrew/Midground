@@ -1,0 +1,31 @@
+.body {
+    background-color: #141414;
+}
+
+.test {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+}
+
+#test-logo {
+    background-color: #80FFFF;
+    background-image: linear-gradient(to top, #FF00FF 0%, #00FFFF 100%);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 10rem;
+    font-weight: 505;
+}
+
+#test-moon {
+    margin-right: 2.5rem;
+}

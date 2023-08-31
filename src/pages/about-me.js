@@ -12,34 +12,34 @@ import _celebration from '../images/celebration.svg';
  
 const AboutMe = () => {
     return (
-        <div class="about-me">
-            <div class="main">
-                <div class="main__container">
-                    <div class="main__content">
+        <div className="about-me">
+            <div className="main">
+                <div className="main__container">
+                    <div className="main__content">
                         <h1>ABOUT ME</h1>
                         <h2>&gt; MATTHEW YANG</h2>
                         <p>&lt;Student/Programmer<br />/Guitarist/Chess Player&gt;</p>
                     </div>
-                    <div class="main__img--container">
-                        <img src={_profile} alt="pic" class="main__img" />
+                    <div className="main__img--container">
+                        <img src={_profile} alt="pic" className="main__img" />
                     </div>
                 </div>
             </div>
 
-            <div class="about">
-                <div class="about__container">
-                    <div class="about__content" id="introduction">
+            <div className="about">
+                <div className="about__container">
+                    <div className="about__content" id="introduction">
                         <h1>Introduction</h1>
                         <p>My name is Matthew Yang. I am a Grade 11 Extended French student at Waterloo Collegiate Institute with a passion for all things STEM and a dream of working in computer science. I am positive, hardworking, collaborative, a critical thinker, and a leader. In my spare time, I enjoy programming, playing chess, practicing guitar, learning advanced mathematics, and solving logic puzzles.</p>
                     </div>
-                    <div class="about__img--container">
-                        <img src={_hello} alt="pic" class="about__img" />
+                    <div className="about__img--container">
+                        <img src={_hello} alt="pic" className="about__img" />
                     </div>
 
-                    <div class="about__img--container">
-                        <img src={_graduation} alt="pic" class="about__img" />
+                    <div className="about__img--container">
+                        <img src={_graduation} alt="pic" className="about__img" />
                     </div>
-                    <div class="about__content" id="education">
+                    <div className="about__content" id="education">
                         <h1>Education</h1>
 
                         <p><b>Lester B. Pearson</b> was my elementary school. During grades 1-8, I was a full-time French Immersion student.</p>
@@ -51,7 +51,7 @@ const AboutMe = () => {
                         <p>I have also gone to <b>KW Chinese School</b> for the past 12 years. Every Saturday, I attend a 4-hour class to improve my Mandarin speaking, listening, reading, and writing skills.</p>
                     </div>
 
-                    <div class="about__content" id="stem">
+                    <div className="about__content" id="stem">
                         <h1>STEM</h1>
                         
                         <h2>Science</h2>
@@ -67,15 +67,15 @@ const AboutMe = () => {
                         <h2>Mathematics</h2>
                         <p>I love mathematics. In kindergarten, my sister decided (for some reason) to teach me how to multiply numbers, sparking my interest in mathematics and inspiring me to keep learning ahead. I improved my skills with Beestar from 2014 to 2016 and began learning more advanced mathematics on Khan Academy in 2016. For the past 6 years, I have attended Math Circles for higher grades at the University of Waterloo. I am currently a member of my school's Math Club and a regular participant in many CEMC math contests (Gauss, Pascal, CIMC, Cayley, Galois, etc.), consistently achieving distinction.</p>
                     </div>
-                    <div class="about__img--container">
-                        <img src={_app} alt="pic" class="about__img about__img--multiple" />
-                        <img src={_math} alt="pic" class="about__img about__img--multiple" />
+                    <div className="about__img--container">
+                        <img src={_app} alt="pic" className="about__img about__img--multiple" />
+                        <img src={_math} alt="pic" className="about__img about__img--multiple" />
                     </div>
 
-                    <div class="about__img--container">
-                        <img src={_celebration} alt="pic" class="about__img" />
+                    <div className="about__img--container">
+                        <img src={_celebration} alt="pic" className="about__img" />
                     </div>
-                    <div class="about__content" id="achievements">
+                    <div className="about__content" id="achievements">
                         <h1>Achievements</h1>
                         <ul>
                             <h3>Hackathons</h3>
