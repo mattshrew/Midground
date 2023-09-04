@@ -10,7 +10,7 @@ import '../styles/index.css';
  
 const Home = () => {
     return (
-        <div>
+        <>
             <div className="main">
                 <div className="main__container">
                     <div className="main__content">
@@ -46,7 +46,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
  

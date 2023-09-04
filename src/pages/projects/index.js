@@ -2,7 +2,10 @@ import React from 'react';
 import { useEffect } from 'react';
 
 import '../../styles.css';
+import '../../styles/index.css';
 import '../../styles/projects.css';
+
+import _portfolio from '../../images/portfolio.svg';
 
 import projects from '../../data/projects.json';
 
@@ -58,11 +61,25 @@ const Projects = () => {
     }
 
     return (
-        <div className="projects">
-            <Gallery>
-                { projects.map((project, index) => <Project {...project} key={`project-${index}`} />) }
-            </Gallery>
-        </div>
+        <>
+            <div className="main">
+                <div className="main__container">
+                    <div className="main__content">
+                        <h1>PORTFOLIO</h1>
+                        <h2>&gt; MY PROJECTS</h2>
+                        <p>&lt;Side/Hackathon Projects&gt;</p>
+                    </div>
+                    <div className="main__img--container">
+                        <img src={_portfolio} alt="pic" className="main__img" />
+                    </div>
+                </div>
+            </div>
+            <div className="projects">
+                <Gallery>
+                    { projects.map((project, index) => <Project {...project} key={`project-${index}`} />) }
+                </Gallery>
+            </div>
+        </>
     )
 }
 
