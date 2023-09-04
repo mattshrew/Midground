@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import _portfolio from '../images/portfolio.svg';
 import _pic1 from '../images/pic1.svg';
-import _pic2 from '../images/pic2.svg';
 import _profile from '../images/profile.svg';
 
 import '../styles.css';
@@ -14,18 +14,18 @@ const Home = () => {
             <div className="main">
                 <div className="main__container">
                     <div className="main__content">
-                        <h1>GAMES</h1>
-                        <h2>&gt; TIC TAC TOE</h2>
-                        <p>&lt;Play vs Player/Computer&gt;</p>
-                        <button className="main__btn"><Link to="/games/ttt">PLAY NOW</Link></button>
+                        <h1>PORTFOLIO</h1>
+                        <h2>&gt; MY PROJECTS</h2>
+                        <p>&lt;Side/Hackathon Projects&gt;</p>
+                        <button className="main__btn"><Link to="/projects">EXPLORE</Link></button>
                     </div>
                     <div className="main__img--container">
-                        <img src={_pic1} alt="pic" className="main__img" />
+                        <img src={_portfolio} alt="pic" className="main__img" />
                     </div>
                 </div>
                 <div className="main__container">
                     <div className="main__img--container">
-                        <img src={_pic2} alt="pic" className="main__img" />
+                        <img src={_pic1} alt="pic" className="main__img" />
                     </div>
                     <div className="main__content">
                         <h1>GAMES</h1>
