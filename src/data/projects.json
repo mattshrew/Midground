@@ -8,20 +8,20 @@
     {
         "id": "phishy",
         "name": "Phishy",
-        "description": "ML-powered chrome extension that detects phishing emails.",
-        "link": "https://github.com/raydrost/Phishy"
+        "description": "A machine learning-powered chrome extension that detects and flags phishing emails.",
+        "link": "https://devpost.com/software/phishy"
     },
     {
         "id": "emojion",
         "name": "Emoɉion",
         "description": "A speech-to-text chrome extension that visualizes emotion in speech data using AssemblyAI.",
-        "link": "https://github.com/mattshrew/Emojion"
+        "link": "https://devpost.com/software/emo-ion"
     },
     {
-        "id": "",
-        "name": "[Rythmhacks?]",
-        "description": "",
-        "link": ""
+        "id": "webstylus",
+        "name": "WebStylus",
+        "description": "A chrome extension for the visually impaired that makes browsing much more accessible.",
+        "link": "https://devpost.com/software/webstylus"
     },
     {
         "id": "",
