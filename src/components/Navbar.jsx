@@ -67,7 +67,20 @@ const Navbar = () => {
 
     useEffect(() => {
         document.title = `${curPage} - Midground`;
-    }, [curPage])
+    }, [curPage]);
+
+    useEffect(() => {
+        let buttons = document.querySelectorAll(".main__btn");
+            if (buttons) buttons.forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    setCurPage(e.target.getAttribute('data-target'));
+                });
+            });
+    }, [curPage]);
+
+    useEffect(() => {
+        console.log(window.location.href);
+    }, [window.location])
 
     function Nav(props) {
         return (

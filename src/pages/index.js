@@ -17,7 +17,7 @@ const Home = () => {
                         <h1>PORTFOLIO</h1>
                         <h2>&gt; MY PROJECTS</h2>
                         <p>&lt;Side/Hackathon Projects&gt;</p>
-                        <button className="main__btn"><Link to="/projects">EXPLORE</Link></button>
+                        <button className="main__btn"><Link to="/projects" data-target="Projects">EXPLORE</Link></button>
                     </div>
                     <div className="main__img--container">
                         <img src={_portfolio} alt="pic" className="main__img" />
@@ -31,7 +31,7 @@ const Home = () => {
                         <h1>GAMES</h1>
                         <h2>&gt; CONNECT 4</h2>
                         <p>&lt;Play vs Player/Computer&gt;</p>
-                        <button className="main__btn"><Link to="/games/c4">PLAY NOW</Link></button>
+                        <button className="main__btn"><Link to="/games/c4" data-target="C4">PLAY NOW</Link></button>
                     </div>
                 </div>
                 <div className="main__container">
@@ -39,7 +39,7 @@ const Home = () => {
                         <h1>ABOUT ME</h1>
                         <h2>&gt; MATTHEW YANG</h2>
                         <p>&lt;Student/Programmer<br />/Guitarist/Chess Player&gt;</p>
-                        <button className="main__btn"><Link to="/about-me">LEARN MORE</Link></button>
+                        <button className="main__btn"><Link to="/about-me" data-target="About Me">LEARN MORE</Link></button>
                     </div>
                     <div className="main__img--container">
                         <img src={_profile} alt="pic" className="main__img" />
