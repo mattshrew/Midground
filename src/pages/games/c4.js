@@ -69,7 +69,6 @@ const C4 = () => {
         if (gameState !== 0 || (mode === 1 && player === 1)) return;
         let row = Number(cell.getAttribute("data-row"));
         let col = Number(cell.getAttribute("data-col"));
-        console.log(row);
         for (let i = 0; i <= row; i++) {
             if (isEmpty([i, col])) {
                 let hoveredCell = document.querySelector(`[data-row="${i}"][data-col="${col}"]`);

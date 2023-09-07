@@ -79,8 +79,12 @@ const Navbar = () => {
     }, [curPage]);
 
     useEffect(() => {
-        console.log(window.location.href);
-    }, [window.location])
+        let path = window.location.href.slice(window.location.href.length - window.location.href.split("").reverse().join("").indexOf("/") - 1);
+        for (const page of pages) {
+            if (path === page.path) setCurPage(page.name);
+        }
+        // eslint-disable-next-line
+    }, [window.location.href])
 
     function Nav(props) {
         return (
@@ -118,15 +122,19 @@ const Navbar = () => {
             const [open, setOpen] = useState(false);
 
             return (
-                <li className="navbar__item">
+                <>
                     {(props.children.length) ? (
-                        <Link to={props.path} className={`navbar__links${(props.children.map(child => child.name).includes(curPage)) ? " navbar__links--current" : ""}`} onClick={() => setOpen(!open)}>{props.name}&nbsp;{(open) ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}</Link>
+                        <ul className="navbar__item">
+                            <Link to={props.path} className={`navbar__links${(props.children.map(child => child.name).includes(curPage)) ? " navbar__links--current" : ""}`} onClick={() => setOpen(!open)}>{props.name}&nbsp;{(open) ? <i className="fas fa-caret-up"></i> : <i className="fas fa-caret-down"></i>}</Link>
+                            {open && <DropdownMenu {...props} />}
+                        </ul>
                     ) : (
-                        <Link to={props.path} className={`navbar__links${(curPage === props.name) ? " navbar__links--current" : ""}`} onClick={() => setCurPage(props.name)}>{props.name}</Link>
+                        <li className="navbar__item">
+                            <Link to={props.path} className={`navbar__links${(curPage === props.name) ? " navbar__links--current" : ""}`} onClick={() => setCurPage(props.name)}>{props.name}</Link>
+                        </li>
                     )}
-                    
-                    {open && <DropdownMenu {...props} />}
-                </li>
+                </>
+                
             )
         }
 
