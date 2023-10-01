@@ -6,6 +6,12 @@
         "link": "/"
     },
     {
+        "id": "webstylus",
+        "name": "WebStylus",
+        "description": "A chrome extension for the visually impaired that makes browsing much more accessible.",
+        "link": "https://webstylus.vercel.app"
+    },
+    {
         "id": "phishy",
         "name": "Phishy",
         "description": "A machine learning-powered chrome extension that detects and flags phishing emails.",
@@ -18,20 +24,14 @@
         "link": "https://devpost.com/software/emo-ion"
     },
     {
-        "id": "webstylus",
-        "name": "WebStylus",
-        "description": "A chrome extension for the visually impaired that makes browsing much more accessible.",
-        "link": "https://devpost.com/software/webstylus"
+        "id": "injuryinspect",
+        "name": "InjuryInspect",
+        "description": "An LLM-powered web application designed to help diagnose and treat a variety of injuries.",
+        "link": "https://devpost.com/software/injuryinspect"
     },
     {
         "id": "",
-        "name": "[HackTheNorth?]",
-        "description": "",
-        "link": ""
-    },
-    {
-        "id": "",
-        "name": "[HackTheValley?]",
+        "name": "Coming soon...",
         "description": "",
         "link": ""
         }
