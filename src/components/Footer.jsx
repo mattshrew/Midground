@@ -31,9 +31,9 @@ const Footer = () => {
                             <i className="fab fa-twitter twitter"></i>
                             <span className="tooltip">???</span>
                         </a>
-                        <a className="social__icon--link" href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                        <a className="social__icon--link" href="https://www.linkedin.com/in/matthew-y/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
                             <i className="fab fa-linkedin linkedin"></i>
-                            <span className="tooltip">???</span>
+                            <span className="tooltip">matthew-y</span>
                         </a>
                     </div>
                 </div>
