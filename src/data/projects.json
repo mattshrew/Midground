@@ -30,9 +30,9 @@
         "link": "https://devpost.com/software/injuryinspect"
     },
     {
-        "id": "",
-        "name": "Coming soon...",
-        "description": "",
-        "link": ""
+        "id": "touchup",
+        "name": "TouchUp",
+        "description": "An app that uses computer vision to enable the control of devices using only hand gestures.",
+        "link": "https://dorahacks.io/buidl/13414"
         }
 ]
