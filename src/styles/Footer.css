@@ -123,6 +123,13 @@
 }
 
 .social__icon--link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.social__icon--link {
     position: relative;
 }
 
@@ -146,6 +153,11 @@
     font-size: 1rem;
 }
 
+.devpost {
+    width: 24px;
+    height: 24px;
+}
+
 .discord:hover{
     color: #4267B2;
     transition: 0.5s ease-out;
@@ -156,8 +168,8 @@
     transition: 0.5s ease-out;
 }
   
-.twitter:hover{
-    color: #00acee;
+.devpost:hover > path {
+    fill: #00acee;
     transition: 0.5s ease-out;
 }
 
